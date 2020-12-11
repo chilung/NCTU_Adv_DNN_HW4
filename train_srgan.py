@@ -28,8 +28,7 @@ checkpoint = None  # path to model (SRGAN) checkpoint, None if none
 batch_size = 16  # batch size
 start_epoch = 0  # start at this epoch
 iterations = 2e5  # number of training iterations
-# workers = 4  # number of workers for loading data in the DataLoader
-workers = 1  # for debug purpose # number of workers for loading data in the DataLoader
+workers = 4  # number of workers for loading data in the DataLoader
 vgg19_i = 5  # the index i in the definition for VGG loss; see paper or models.py
 vgg19_j = 4  # the index j in the definition for VGG loss; see paper or models.py
 beta = 1e-3  # the coefficient to weight the adversarial loss in the perceptual loss
@@ -106,12 +105,9 @@ def main():
                               scaling_factor=scaling_factor,
                               lr_img_type='imagenet-norm',
                               hr_img_type='imagenet-norm')
-    # train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=workers,
-    #                                            pin_memory=True)
-    # for debug purpose, set shuffle = False
-    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=False, num_workers=workers,
+    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=workers,
                                                pin_memory=True)
-
+    
     # Total number of epochs to train for
     epochs = int(iterations // len(train_loader) + 1)
 
