@@ -106,7 +106,10 @@ def main():
                               scaling_factor=scaling_factor,
                               lr_img_type='imagenet-norm',
                               hr_img_type='imagenet-norm')
-    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=workers,
+    # train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=workers,
+    #                                            pin_memory=True)
+    # for debug purpose, set shuffle = False
+    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=False, num_workers=workers,
                                                pin_memory=True)
 
     # Total number of epochs to train for
