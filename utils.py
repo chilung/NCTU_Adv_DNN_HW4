@@ -137,7 +137,7 @@ class ImageTransforms(object):
         if self.split == 'train':
             # Take a random fixed-size crop of the image, which will serve as the high-resolution (HR) image
             print('img.width - self.crop_size: {}'.format(img.width - self.crop_size))
-            if img.width < self.crop_size:
+            if img.width == self.crop_size:
                 print('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
             left = random.randint(1, img.width - self.crop_size)
             print('img.height - self.crop_size: {}'.format(img.height - self.crop_size)) 
