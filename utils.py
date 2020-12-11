@@ -118,7 +118,6 @@ class ImageTransforms(object):
         :param lr_img_type: the target format for the LR image; see convert_image() above for available formats
         :param hr_img_type: the target format for the HR image; see convert_image() above for available formats
         """
-        print('=============== file: {}, func: {}, line: {}, crop_size: {}, scaling_factor: {}, lr_img_type: {}, hr_img_type: {}'.format('utils', 'ImageTransforms', 121, crop_size, scaling_factor, lr_img_type, hr_img_type)) 
         self.split = split.lower()
         self.crop_size = crop_size
         self.scaling_factor = scaling_factor
@@ -136,8 +135,8 @@ class ImageTransforms(object):
         # Crop
         if self.split == 'train':
             # Take a random fixed-size crop of the image, which will serve as the high-resolution (HR) image
-            left = random.randint(1, img.width - self.crop_size)
-            top = random.randint(1, img.height - self.crop_size)
+            left = 1 if img.width <= self.crop_size else random.randint(1, img.width - self.crop_size)
+            top = 1 if img.height <= self.crop_size else random.randint(1, img.height - self.crop_size)
             right = left + self.crop_size
             bottom = top + self.crop_size
             print('left: {}, top: {}, right: {}, bottom: {}'.format(left, top, right, bottom))
