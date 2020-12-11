@@ -64,7 +64,7 @@ class SRDataset(Dataset):
         :return: the 'i'th pair LR and HR images to be fed into the model
         """
         # Read image
-        i = 192
+        i = 191
         img = Image.open(self.images[i], mode='r')
         img = img.convert('RGB')
         print('self.images {}: {}, width: {}, height: {}'.format(i, self.images[i], img.width, img.height))
