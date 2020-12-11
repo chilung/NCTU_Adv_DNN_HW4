@@ -139,7 +139,6 @@ class ImageTransforms(object):
             top = 1 if img.height <= self.crop_size else random.randint(1, img.height - self.crop_size)
             right = left + self.crop_size
             bottom = top + self.crop_size
-            print('left: {}, top: {}, right: {}, bottom: {}'.format(left, top, right, bottom))
             hr_img = img.crop((left, top, right, bottom))
         else:
             # Take the largest possible center-crop of it such that its dimensions are perfectly divisible by the scaling factor
