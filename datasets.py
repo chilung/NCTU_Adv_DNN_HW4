@@ -67,11 +67,9 @@ class SRDataset(Dataset):
         # i = 194
         img = Image.open(self.images[i], mode='r')
         img = img.convert('RGB')
-        print('self.images {}: {}, width: {}, height: {}'.format(i, self.images[i], img.width, img.height))
         if img.width <= 96 or img.height <= 96:
-            print('skip images {}, width: {}, height: {}'.format(i, img.width, img.height))
-        else:
-            lr_img, hr_img = self.transform(img)
+            print('self.images {}, width: {}, height: {}'.format(i, img.width, img.height))
+        lr_img, hr_img = self.transform(img)
 
         return lr_img, hr_img
 
