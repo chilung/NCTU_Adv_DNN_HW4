@@ -36,6 +36,9 @@ print_freq = 500  # print training status once every __ batches
 lr = 1e-4  # learning rate
 grad_clip = None  # clip if gradients are exploding
 
+# checkpoint output directory
+output = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint'
+
 # Default device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -134,12 +137,13 @@ def main():
               epoch=epoch)
 
         # Save checkpoint
-        torch.save({'epoch': epoch,
+        if epoch % 1 == 0:
+            torch.save({'epoch': epoch,
                     'generator': generator,
                     'discriminator': discriminator,
                     'optimizer_g': optimizer_g,
                     'optimizer_d': optimizer_d},
-                   'checkpoint_srgan.pth.tar')
+                    os.path.join(output, 'checkpoint_{}_srgan.pth.tar'.format(epoch)))
 
 
 def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_criterion, adversarial_loss_criterion,
