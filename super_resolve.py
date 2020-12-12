@@ -32,6 +32,7 @@ def visualize_sr(img, halve=False):
     """
     # Load image, downsample to obtain low-res version
     print('img: {}'.format(img))
+    
     hr_img = Image.open(img, mode="r")
     hr_img = hr_img.convert('RGB')
     if halve:
@@ -103,4 +104,4 @@ def visualize_sr(img, halve=False):
 
 if __name__ == '__main__':
     # grid_img = visualize_sr('/media/ssd/sr data/Set14/baboon.png')
-    grid_img = visualize_sr('./img/baboon.png')
+    grid_img = visualize_sr('./training_hr_images/8049.png')
