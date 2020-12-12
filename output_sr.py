@@ -4,8 +4,7 @@ from os.path import isfile, join
 import torch
 from utils import *
 from PIL import Image, ImageDraw, ImageFont
-import date
-import time
+import datetime
 
 testing_path = './testing_lr_images'
 output_path = './output_sr'
@@ -25,8 +24,8 @@ testing_files = [join(testing_path, f) for f in listdir(testing_path) if isfile(
 print('number of testing samples: {}'.format(len(testing_files)))
 print('list of testing samples: {}'.format(testing_files))
 
-print(date.date, time.time)
-# os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
+output_path = output_path + datetime.datetime.now()
+os.makedirs(output_path, exist_ok=True)
 
 
 exit(0)
