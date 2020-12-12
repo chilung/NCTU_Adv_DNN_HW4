@@ -140,7 +140,7 @@ class SRResNet(nn.Module):
     The SRResNet, as defined in the paper.
     """
 
-    def __init__(self, large_kernel_size=9, small_kernel_size=3, n_channels=64, n_blocks=16, scaling_factor=4):
+    def __init__(self, large_kernel_size=9, small_kernel_size=3, n_channels=64, n_blocks=16, scaling_factor=3):
         """
         :param large_kernel_size: kernel size of the first and last convolutions which transform the inputs and outputs
         :param small_kernel_size: kernel size of all convolutions in-between, i.e. those in the residual and subpixel convolutional blocks
@@ -175,7 +175,7 @@ class SRResNet(nn.Module):
         
         print('File: {}, Func: {}, Line: {}, n_subpixel_convolution_blocks: {}'.format('models', 'SRResNet', 168, n_subpixel_convolution_blocks))
         self.subpixel_convolutional_blocks = nn.Sequential(
-            *[SubPixelConvolutionalBlock(kernel_size=small_kernel_size, n_channels=n_channels, scaling_factor=2) for i
+            *[SubPixelConvolutionalBlock(kernel_size=small_kernel_size, n_channels=n_channels, scaling_factor=scaling_factor) for i
               in range(n_subpixel_convolution_blocks)])
 
         # The last convolutional block
