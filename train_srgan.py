@@ -9,7 +9,6 @@ from utils import *
 data_folder = './'  # folder with JSON data files
 crop_size = 96  # crop size of target HR images
 scaling_factor = 4  # the scaling factor for the generator; the input LR images will be downsampled from the target HR images by this factor
-
 # scaling_factor = 3  # the scaling factor for the generator; the input LR images will be downsampled from the target HR images by this factor
 
 # Generator parameters
@@ -40,7 +39,7 @@ grad_clip = None  # clip if gradients are exploding
 
 # checkpoint output directory
 # output = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint'
-output = './checkpoint_3_1'
+checkpoint_path = './checkpoint_3_1'
 
 # Default device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -146,7 +145,7 @@ def main():
                     'discriminator': discriminator,
                     'optimizer_g': optimizer_g,
                     'optimizer_d': optimizer_d},
-                    os.path.join(output, 'checkpoint_{}_srgan.pth.tar'.format(epoch)))
+                    os.path.join(checkpoint_path, 'checkpoint_{}_srgan.pth.tar'.format(epoch)))
 
 
 def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_criterion, adversarial_loss_criterion,
