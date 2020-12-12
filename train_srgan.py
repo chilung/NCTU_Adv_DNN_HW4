@@ -8,7 +8,8 @@ from utils import *
 # Data parameters
 data_folder = './'  # folder with JSON data files
 crop_size = 96  # crop size of target HR images
-scaling_factor = 4  # the scaling factor for the generator; the input LR images will be downsampled from the target HR images by this factor
+# scaling_factor = 4  # the scaling factor for the generator; the input LR images will be downsampled from the target HR images by this factor
+scaling_factor = 3  # the scaling factor for the generator; the input LR images will be downsampled from the target HR images by this factor
 
 # Generator parameters
 large_kernel_size_g = 9  # kernel size of the first and last convolutions which transform the inputs and outputs
