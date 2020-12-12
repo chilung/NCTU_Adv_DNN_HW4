@@ -208,6 +208,7 @@ class Generator(nn.Module):
         super(Generator, self).__init__()
 
         # The generator is simply an SRResNet, as above
+        print('File: {}, Func: {}, Line: {}, scaling_factor: {}'.format('models', 'Generator', 211, scaling_factor))
         self.net = SRResNet(large_kernel_size=large_kernel_size, small_kernel_size=small_kernel_size,
                             n_channels=n_channels, n_blocks=n_blocks, scaling_factor=scaling_factor)
 
