@@ -163,7 +163,9 @@ class SRResNet(nn.Module):
                                               batch_norm=True, activation=None)
 
         # Upscaling is done by sub-pixel convolution, with each such block upscaling by a factor of 2
+        print('File: {}, Func: {}, Line: {}, scaling_factor: {}'.format('models', 'SRResNet', 166, scaling_factor))
         n_subpixel_convolution_blocks = int(math.log2(scaling_factor))
+        print('File: {}, Func: {}, Line: {}, n_subpixel_convolution_blocks: {}'.format('models', 'SRResNet', 168, n_subpixel_convolution_blocks))
         self.subpixel_convolutional_blocks = nn.Sequential(
             *[SubPixelConvolutionalBlock(kernel_size=small_kernel_size, n_channels=n_channels, scaling_factor=2) for i
               in range(n_subpixel_convolution_blocks)])
