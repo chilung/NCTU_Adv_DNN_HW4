@@ -71,10 +71,12 @@ class SubPixelConvolutionalBlock(nn.Module):
         :param scaling_factor: factor to scale input images by (along both dimensions)
         """
         super(SubPixelConvolutionalBlock, self).__init__()
-
+        scaling_factor=3
         # A convolutional layer that increases the number of channels by scaling factor^2, followed by pixel shuffle and PReLU
         print('File: {}, Func: {}, Line: {}, scaling_factor**2: {}'.format('models', 'SubPixelConvolutionalBlock', 76, scaling_factor ** 2))
-        self.conv = nn.Conv2d(in_channels=n_channels, out_channels=n_channels * (scaling_factor ** 2),
+        # self.conv = nn.Conv2d(in_channels=n_channels, out_channels=n_channels * (scaling_factor ** 2),
+        #                       kernel_size=kernel_size, padding=kernel_size // 2)
+        self.conv = nn.Conv2d(in_channels=n_channels, out_channels=n_channels * 9,
                               kernel_size=kernel_size, padding=kernel_size // 2)
         # These additional channels are shuffled to form additional pixels, upscaling each dimension by the scaling factor
         print('File: {}, Func: {}, Line: {}, scaling_factor: {}'.format('models', 'SubPixelConvolutionalBlock', 80, scaling_factor))
