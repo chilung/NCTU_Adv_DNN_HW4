@@ -4,6 +4,11 @@ from os.path import isfile, join
 import torch
 from utils import *
 from PIL import Image, ImageDraw, ImageFont
+import date
+import time
+
+testing_path = './testing_lr_images'
+output_path = './output_sr'
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -16,17 +21,14 @@ srgan_generator = torch.load(srgan_checkpoint)['generator'].to(device)
 srgan_generator.eval()
 
 
-testing_path = './testing_lr_images'
 testing_files = [join(testing_path, f) for f in listdir(testing_path) if isfile(join(testing_path, f))]
 print('number of testing samples: {}'.format(len(testing_files)))
 print('list of testing samples: {}'.format(testing_files))
 
-import json
+print(date.date, time.time)
+# os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
 
-with open('./train_images.json', 'w') as f:
-    json.dump(trainingfiles, f)
-    
-    
+
 exit(0)
 print('img: {}'.format(img))
     
