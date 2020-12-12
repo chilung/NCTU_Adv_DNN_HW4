@@ -31,6 +31,7 @@ def visualize_sr(img, halve=False):
                   If you want to reduce HR resolution by a different extent, modify accordingly.
     """
     # Load image, downsample to obtain low-res version
+    print('img: {}'.format(img))
     hr_img = Image.open(img, mode="r")
     hr_img = hr_img.convert('RGB')
     if halve:
