@@ -24,7 +24,7 @@ testing_files = [join(testing_path, f) for f in listdir(testing_path) if isfile(
 print('number of testing samples: {}'.format(len(testing_files)))
 print('list of testing samples: {}'.format(testing_files))
 
-output_path = output_path + datetime.datetime.now()
+output_path = output_path + str(datetime.datetime.now())
 os.makedirs(output_path, exist_ok=True)
 
 
