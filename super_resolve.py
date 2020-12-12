@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw, ImageFont
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Model checkpoints
-srgan_checkpoint = 'checkpoint_5400_srgan.pth.tar'
+srgan_checkpoint = 'checkpoint_0_srgan.pth.tarcheckpoint_0_srgan.pth.tar'
 # srgan_checkpoint = "./checkpoint_srgan.pth.tar"
 srresnet_checkpoint = "./checkpoint_srresnet.pth.tar"
 
