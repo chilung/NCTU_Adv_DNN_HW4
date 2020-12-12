@@ -40,7 +40,9 @@ def visualize_sr(img, halve=False):
                                Image.LANCZOS)
     lr_img = hr_img.resize((int(hr_img.width / 4), int(hr_img.height / 4)),
                            Image.BICUBIC)
-
+    hr_img.show()
+    lr_img.show()
+    
     # Bicubic Upsampling
     bicubic_img = lr_img.resize((hr_img.width, hr_img.height), Image.BICUBIC)
 
