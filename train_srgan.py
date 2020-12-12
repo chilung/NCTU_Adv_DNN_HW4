@@ -56,6 +56,7 @@ def main():
     # Initialize model or load checkpoint
     if checkpoint is None:
         # Generator
+        print('File: {}, Func: {}, Line: {}, scaling_factor: {}'.format('train_srgan', 'main', 59, scaling_factor))
         generator = Generator(large_kernel_size=large_kernel_size_g,
                               small_kernel_size=small_kernel_size_g,
                               n_channels=n_channels_g,
