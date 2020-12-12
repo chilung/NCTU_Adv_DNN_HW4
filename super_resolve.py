@@ -40,11 +40,7 @@ def visualize_sr(img, halve=False):
                                Image.LANCZOS)
     lr_img = hr_img.resize((int(hr_img.width / 4), int(hr_img.height / 4)),
                            Image.BICUBIC)
-    hr_img.show()
-    return
 
-    lr_img.show()
-    
     # Bicubic Upsampling
     bicubic_img = lr_img.resize((hr_img.width, hr_img.height), Image.BICUBIC)
 
@@ -65,7 +61,7 @@ def visualize_sr(img, halve=False):
     # Font
     draw = ImageDraw.Draw(grid_img)
     try:
-        font = ImageFont.truetype("calibril.ttf", size=23)
+        font = ImageFont.truetype("calibri.ttf", size=23)
         # It will also look for this file in your OS's default fonts directory, where you may have the Calibri Light font installed if you have MS Office
         # Otherwise, use any TTF font of your choice
     except OSError:
