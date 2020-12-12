@@ -20,7 +20,7 @@ srgan_generator = torch.load(srgan_checkpoint)['generator'].to(device)
 srgan_generator.eval()
 
 testing_files = [f for f in listdir(testing_path) if isfile(join(testing_path, f))]
-testing_files.sorted()
+testing_files.sort()
 print('number of testing samples: {}'.format(len(testing_files)))
 print('list of testing samples: {}'.format(testing_files))
 
