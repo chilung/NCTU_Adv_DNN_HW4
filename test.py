@@ -96,3 +96,7 @@ def visualize_sr(img, halve=False):
     grid_img.show()
 
     return grid_img
+
+if __name__ == '__main__':
+    # grid_img = visualize_sr('/media/ssd/sr data/Set14/baboon.png')
+    grid_img = visualize_sr('./img/baboon.png')
