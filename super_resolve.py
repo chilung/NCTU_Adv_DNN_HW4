@@ -54,7 +54,8 @@ def visualize_sr(img, halve=False):
     sr_img_srgan = srgan_generator(convert_image(lr_img, source='pil', target='imagenet-norm').unsqueeze(0).to(device))
     sr_img_srgan = sr_img_srgan.squeeze(0).cpu().detach()
     sr_img_srgan = convert_image(sr_img_srgan, source='[-1, 1]', target='pil')
-
+    sr_img_srgan.save('./sr_00.png')
+    
     # Create grid
     margin = 40
     grid_img = Image.new('RGB', (2 * hr_img.width + 3 * margin, 2 * hr_img.height + 3 * margin), (255, 255, 255))
@@ -106,14 +107,6 @@ def visualize_sr(img, halve=False):
 
 if __name__ == '__main__':
     # grid_img = visualize_sr('/media/ssd/sr data/Set14/baboon.png')
-    # grid_img = visualize_sr('./training_hr_images/8049.png')
+    grid_img = visualize_sr('./training_hr_images/2092.png')
     # grid_img.save('./output.png')
     
-    lr_img = Image.open('./testing_lr_images/00.png', mode="r")
-    lr_img = lr_img.convert('RGB')
-    
-    sr_img_srgan = srgan_generator(convert_image(lr_img, source='pil', target='imagenet-norm').unsqueeze(0).to(device))
-    sr_img_srgan = sr_img_srgan.squeeze(0).cpu().detach()
-    sr_img_srgan = convert_image(sr_img_srgan, source='[-1, 1]', target='pil')
-    
-    sr_img_srgan.save('./sr_00.png')
