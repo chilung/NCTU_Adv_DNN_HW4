@@ -14,14 +14,14 @@ srgan_generator = torch.load(srgan_checkpoint)['generator'].to(device)
 srgan_generator.eval()
 
 exit(0)
-    print('img: {}'.format(img))
+print('img: {}'.format(img))
     
-    hr_img = Image.open(img, mode="r")
-    hr_img = hr_img.convert('RGB')
-    sr_img_srgan = srgan_generator(convert_image(lr_img, source='pil', target='imagenet-norm').unsqueeze(0).to(device))
-    sr_img_srgan = sr_img_srgan.squeeze(0).cpu().detach()
-    sr_img_srgan = convert_image(sr_img_srgan, source='[-1, 1]', target='pil')
-    sr_img_srgan.save('./sr_00.png')
+hr_img = Image.open(img, mode="r")
+hr_img = hr_img.convert('RGB')
+sr_img_srgan = srgan_generator(convert_image(lr_img, source='pil', target='imagenet-norm').unsqueeze(0).to(device))
+sr_img_srgan = sr_img_srgan.squeeze(0).cpu().detach()
+sr_img_srgan = convert_image(sr_img_srgan, source='[-1, 1]', target='pil')
+sr_img_srgan.save('./sr_00.png')
 
     
 def visualize_sr(img, halve=False):
