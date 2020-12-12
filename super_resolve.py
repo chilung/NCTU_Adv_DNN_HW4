@@ -106,3 +106,4 @@ def visualize_sr(img, halve=False):
 if __name__ == '__main__':
     # grid_img = visualize_sr('/media/ssd/sr data/Set14/baboon.png')
     grid_img = visualize_sr('./training_hr_images/8049.png')
+    grid_img.save('./output.png')
