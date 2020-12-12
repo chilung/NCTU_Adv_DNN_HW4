@@ -41,6 +41,8 @@ def visualize_sr(img, halve=False):
     lr_img = hr_img.resize((int(hr_img.width / 4), int(hr_img.height / 4)),
                            Image.BICUBIC)
     hr_img.show()
+    return
+
     lr_img.show()
     
     # Bicubic Upsampling
