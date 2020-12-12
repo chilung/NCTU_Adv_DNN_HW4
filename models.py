@@ -90,11 +90,11 @@ class SubPixelConvolutionalBlock(nn.Module):
         """
         print('forward input: {}'.format(input.shape))
         output = self.conv(input)  # (N, n_channels * scaling factor^2, w, h)
-        print('forward output1: {}'.format(output.shape()))
+        print('forward output1: {}'.format(output.shape))
         output = self.pixel_shuffle(output)  # (N, n_channels, w * scaling factor, h * scaling factor)
-        print('forward output2: {}'.format(output.shape()))
+        print('forward output2: {}'.format(output.shape))
         output = self.prelu(output)  # (N, n_channels, w * scaling factor, h * scaling factor)
-        print('forward output3: {}'.format(output.shape()))
+        print('forward output3: {}'.format(output.shape))
         
         return output
 
