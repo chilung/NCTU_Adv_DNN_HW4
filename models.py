@@ -153,7 +153,7 @@ class SRResNet(nn.Module):
 
         # Scaling factor must be 2, 4, or 8
         scaling_factor = int(scaling_factor)
-        assert scaling_factor in {2, 4, 8}, "The scaling factor must be 2, 4, or 8!"
+        # assert scaling_factor in {2, 4, 8}, "The scaling factor must be 2, 4, or 8!"
 
         # The first convolutional block
         self.conv_block1 = ConvolutionalBlock(in_channels=3, out_channels=n_channels, kernel_size=large_kernel_size,
