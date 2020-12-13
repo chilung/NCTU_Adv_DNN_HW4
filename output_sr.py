@@ -12,7 +12,7 @@ output_path = './output_sr'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Model checkpoints
-srgan_checkpoint = 'checkpoint_5400_srgan.pth.tar'
+srgan_checkpoint = 'checkpoint_10500_srgan.pth.tar'
 print('device: {}, srgan: {} '.format(device, srgan_checkpoint))
 
 # Load models
@@ -24,7 +24,7 @@ testing_files.sort()
 print('number of testing samples: {}'.format(len(testing_files)))
 print('list of testing samples: {}'.format(testing_files))
 
-output_path = output_path + '_4x_' + str(datetime.datetime.now())
+output_path = output_path + '_3x_1'
 os.makedirs(output_path, exist_ok=True)
 
 for testing_file in testing_files:
