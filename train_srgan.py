@@ -269,12 +269,12 @@ def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_
 
         # Print status
         if i % print_freq == 0:
-            print('Epoch: [{0}][{1}/{2}]----'
-                  'Batch Time {batch_time.val:.3f} ({batch_time.avg:.3f})----'
-                  'Data Time {data_time.val:.3f} ({data_time.avg:.3f})----'
-                  'Cont. Loss {loss_c.val:.4f} ({loss_c.avg:.4f})----'
-                  'Adv. Loss {loss_a.val:.4f} ({loss_a.avg:.4f})----'
-                  'Disc. Loss {loss_d.val:.4f} ({loss_d.avg:.4f})'.format(epoch,
+            print('Epoch: [{0}][{1}/{2}]--'
+                  'Batch Time {batch_time.val:.3f} ({batch_time.avg:.3f})--'
+                  'Data Time {data_time.val:.3f} ({data_time.avg:.3f})--'
+                  'Cont. Loss {loss_c.val:.4f} ({loss_c.avg:.4f})--'
+                  'Adv. Loss {loss_a.val:.4f} ({loss_a.avg:.4f})--'
+                  'Disc. Loss {loss_d.val:.4f} ({loss_d.avg:.4f})--'.format(epoch,
                                                                           i,
                                                                           len(train_loader),
                                                                           batch_time=batch_time,
