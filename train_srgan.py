@@ -119,6 +119,7 @@ def main():
     # Total number of epochs to train for
     print('iterations: {}'.format(iterations))
     epochs = int(iterations // len(train_loader) + 1)
+    print('length of train_loader: {}'.format(len(train_loader)))
     print('epochs = {}'.format(epochs))
 
     # Epochs
