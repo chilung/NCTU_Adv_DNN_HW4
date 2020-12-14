@@ -46,6 +46,17 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 cudnn.benchmark = True
 
+lr_base  = [1e3, 8e3, 2e4, 3e4, 3.5e4]
+lr_value = [1e-3, 1e-4, 5e-5, 1e-5, 5e-6,   1e-6]
+
+def lr_table(epoch):
+    idx = 0
+    for b in lr_base:
+        if epoch < b:
+            break
+        idx+= 1
+
+    return lr_value[idx]
 
 def main():
     """
