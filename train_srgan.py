@@ -191,7 +191,7 @@ def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_
     losses_d = AverageMeter()  # adversarial loss in the discriminator
 
     start = time.time()
-    for p in optimizer_g:
+    for p in optimizer_g.param_groups:
         print(p)
         
         
