@@ -283,7 +283,7 @@ def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_
                                                                           loss_c=losses_c,
                                                                           loss_a=losses_a,
                                                                           loss_d=losses_d,
-                                                                          optimizer_g.param_groups[0].['lr']))
+                                                                          optimizer_g.param_groups[0]['lr']))
 
     del lr_imgs, hr_imgs, sr_imgs, hr_imgs_in_vgg_space, sr_imgs_in_vgg_space, hr_discriminated, sr_discriminated  # free some memory since their histories may be stored
 
