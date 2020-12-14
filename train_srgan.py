@@ -191,9 +191,6 @@ def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_
     losses_d = AverageMeter()  # adversarial loss in the discriminator
 
     start = time.time()
-    for p in optimizer_g.param_groups:
-        print(p['lr'])
-        
         
     # Batches
     for i, (lr_imgs, hr_imgs) in enumerate(train_loader):
@@ -282,13 +279,16 @@ def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_
                                                                           len(train_loader),
                                                                           batch_time=batch_time,
                                                                           data_time=data_time,
-                                                                          loss_c=losses_c,
+                                                                      for p in optimizer_g.param_groups:
+        print(p['lr'])
+        
+                loss_c=losses_c,
                                                                           loss_a=losses_a,
                                                                           loss_d=losses_d
-                                                                          ))
-# ----'
-#                  'learning rate {loss_d.val:10f}
-# optimizer_g.param_groups[0]['lr']
+                                                                          ), end = '')
+    for p in optimizer_g.param_groups:
+        print('learning rate: {}'.format(p['lr']))
+
     del lr_imgs, hr_imgs, sr_imgs, hr_imgs_in_vgg_space, sr_imgs_in_vgg_space, hr_discriminated, sr_discriminated  # free some memory since their histories may be stored
 
 
