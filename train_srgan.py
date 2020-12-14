@@ -26,19 +26,22 @@ fc_size_d = 1024  # size of the first fully connected layer
 
 # Learning parameters
 checkpoint = 'checkpoint_10500_srgan.pth.tar'  # path to model (SRGAN) checkpoint, None if none
+checkpoint = None  # path to model (SRGAN) checkpoint, None if none
 batch_size = 16  # batch size
 start_epoch = 0  # start at this epoch
 iterations = 2e5  # number of training iterations
+epochs = 38000
 workers = 4  # number of workers for loading data in the DataLoader
 vgg19_i = 5  # the index i in the definition for VGG loss; see paper or models.py
 vgg19_j = 4  # the index j in the definition for VGG loss; see paper or models.py
 beta = 1e-3  # the coefficient to weight the adversarial loss in the perceptual loss
 print_freq = 500  # print training status once every __ batches
-lr = 1e-4  # learning rate
+# lr = 1e-4  # learning rate
+lr = 1e-2  # learning rate
 grad_clip = None  # clip if gradients are exploding
 
 # checkpoint output directory
-checkpoint_path = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_1'
+checkpoint_path = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_2'
 # checkpoint_path = './checkpoint_3_1'
 
 # Default device
@@ -46,17 +49,12 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 cudnn.benchmark = True
 
-lr_base  = [1e3, 8e3, 2e4, 3e4, 3.5e4]
-lr_value = [1e-3, 1e-4, 5e-5, 1e-5, 5e-6,   1e-6]
-
+lr_base  = {1e3: 0.1, 8e3: 0.1, 2e4: 0.5, 3e4: 0.2, 3.5e4: 0.5}
 def lr_table(epoch):
-    idx = 0
-    for b in lr_base:
-        if epoch < b:
-            break
-        idx+= 1
+    if epoch in lr_base:
+        return lr_base[epoch]
 
-    return lr_value[idx]
+    return 1
 
 def main():
     """
@@ -129,7 +127,7 @@ def main():
     
     # Total number of epochs to train for
     print('iterations: {}'.format(iterations))
-    epochs = int(iterations // len(train_loader) + 1)
+    # epochs = int(iterations // len(train_loader) + 1)
     print('length of train_loader: {}'.format(len(train_loader)))
     print('epochs = {}'.format(epochs))
 
@@ -137,9 +135,14 @@ def main():
     for epoch in range(start_epoch, epochs):
 
         # At the halfway point, reduce learning rate to a tenth
-        if epoch == int((iterations / 2) // len(train_loader) + 1):
-            adjust_learning_rate(optimizer_g, 0.1)
-            adjust_learning_rate(optimizer_d, 0.1)
+        # if epoch == int((iterations / 2) // len(train_loader) + 1):
+        #     adjust_learning_rate(optimizer_g, 0.1)
+        #     adjust_learning_rate(optimizer_d, 0.1)
+        adjust_rate = lr_table(epoch)
+        if not adjust_rate == 1:
+            print('adjust learning rate by {}'.format(adjust_rate))
+            adjust_learning_rate(optimizer_g, adjust_rate)
+            adjust_learning_rate(optimizer_d, adjust_rate)
 
         # One epoch's training
         train(train_loader=train_loader,
