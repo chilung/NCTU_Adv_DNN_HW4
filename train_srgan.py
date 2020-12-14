@@ -279,10 +279,7 @@ def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_
                                                                           len(train_loader),
                                                                           batch_time=batch_time,
                                                                           data_time=data_time,
-                                                                      for p in optimizer_g.param_groups:
-        print(p['lr'])
-        
-                loss_c=losses_c,
+                                                                          loss_c=losses_c,
                                                                           loss_a=losses_a,
                                                                           loss_d=losses_d
                                                                           ), end = '')
