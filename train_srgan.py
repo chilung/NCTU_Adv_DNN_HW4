@@ -25,8 +25,8 @@ n_blocks_d = 8  # number of convolutional blocks
 fc_size_d = 1024  # size of the first fully connected layer
 
 # Learning parameters
-checkpoint = 'checkpoint_10500_srgan.pth.tar'  # path to model (SRGAN) checkpoint, None if none
-checkpoint = None  # path to model (SRGAN) checkpoint, None if none
+checkpoint = 'checkpoint_20400_srgan.pth.tar'  # path to model (SRGAN) checkpoint, None if none
+# checkpoint = None  # path to model (SRGAN) checkpoint, None if none
 batch_size = 16  # batch size
 start_epoch = 0  # start at this epoch
 iterations = 2e5  # number of training iterations
