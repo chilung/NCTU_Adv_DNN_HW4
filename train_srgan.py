@@ -36,8 +36,8 @@ vgg19_i = 5  # the index i in the definition for VGG loss; see paper or models.p
 vgg19_j = 4  # the index j in the definition for VGG loss; see paper or models.py
 beta = 1e-3  # the coefficient to weight the adversarial loss in the perceptual loss
 print_freq = 500  # print training status once every __ batches
-# lr = 1e-4  # learning rate
-lr = 1e-2  # learning rate
+lr = 1e-4  # learning rate
+# lr = 1e-2  # learning rate
 grad_clip = None  # clip if gradients are exploding
 
 # checkpoint output directory
@@ -49,7 +49,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 cudnn.benchmark = True
 
-lr_base  = {1e3: 0.1, 8e3: 0.1, 2e4: 0.5, 3e4: 0.2, 3.5e4: 0.5}
+lr_base  = {2e4: 0.1, 3e4: 0.2, 3.5e4: 0.5}
 def lr_table(epoch):
     if epoch in lr_base:
         return lr_base[epoch]
