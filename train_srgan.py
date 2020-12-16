@@ -156,7 +156,7 @@ def main():
               epoch=epoch)
 
         # Save checkpoint
-        if epoch % 100 == 0:
+        if epoch % 1000 == 0:
             torch.save({'epoch': epoch,
                     'generator': generator,
                     'discriminator': discriminator,
