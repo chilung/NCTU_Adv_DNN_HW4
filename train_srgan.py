@@ -30,7 +30,7 @@ checkpoint = None  # path to model (SRGAN) checkpoint, None if none
 batch_size = 16  # batch size
 start_epoch = 0  # start at this epoch
 iterations = 2e5  # number of training iterations
-epochs = 38000
+epochs = 40001
 workers = 4  # number of workers for loading data in the DataLoader
 vgg19_i = 5  # the index i in the definition for VGG loss; see paper or models.py
 vgg19_j = 4  # the index j in the definition for VGG loss; see paper or models.py
@@ -49,7 +49,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 cudnn.benchmark = True
 
-lr_base  = {2e4: 0.1, 3e4: 0.2, 3.5e4: 0.5}
+lr_base  = {15000: 0.1, 25000:0.1, 30000: 0.1, 35000: 0.1}
 def lr_table(epoch):
     if epoch in lr_base:
         return lr_base[epoch]
