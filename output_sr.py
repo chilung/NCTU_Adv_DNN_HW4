@@ -7,7 +7,8 @@ from PIL import Image, ImageDraw, ImageFont
 import datetime
 
 testing_path = './testing_lr_images'
-output_path = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/output_sr_3x_2'
+# output_path = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/output_sr_3x_2'
+output_path = './output_sr_3x_2'
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
