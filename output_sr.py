@@ -14,7 +14,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Model checkpoints
 # srgan_checkpoint = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_2/checkpoint_40000_srgan.pth.tar'
-srgan_checkpoint = './checkpoint_3x_2/checkpoint_37000_srgan.pth.tar'
+srgan_checkpoint = './checkpoint_3x_2/checkpoint_40000_srgan.pth.tar'
 print('device: {}, srgan: {} '.format(device, srgan_checkpoint))
 
 # Load models
