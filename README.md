@@ -8,8 +8,8 @@ reference github: [Tutorial to Super-Resolution](https://github.com/sgrvinod/a-P
 </code></pre>
 2. download traing dataset
 3. produce file './train_images.json' in root and contain the training filename list, such as:
-<pre><code>['./training_hr_images/92059.png'
-'./training_hr_images/15004.png',
+<pre><code>'./training_hr_images/92059.png'
+'./training_hr_images/15004.png'
 ...
 </code></pre>
 
