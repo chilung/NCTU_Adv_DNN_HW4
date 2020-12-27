@@ -7,7 +7,11 @@ reference github: [Tutorial to Super-Resolution](https://github.com/sgrvinod/a-P
 %cd /content/NCTU_Adv_DNN_HW4
 </code></pre>
 2. download traing dataset
-
+3. produce file './train_images.json' in root and contain the training filename list, such as:
+<pre><code>['./training_hr_images/92059.png'
+'./training_hr_images/15004.png',
+...
+</code></pre>
 
 This is the fifth in [a series of tutorials](https://github.com/sgrvinod/Deep-Tutorials-for-PyTorch) I'm writing about _implementing_ cool models on your own with the amazing PyTorch library.
 
