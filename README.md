@@ -2,9 +2,12 @@
 reference github: [Tutorial to Super-Resolution](https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Super-Resolution)
 
 # README
+1. clone github
 <pre><code>!git clone https://github.com/chilung/NCTU_Adv_DNN_HW4.git
 %cd /content/NCTU_Adv_DNN_HW4
 </code></pre>
+2. download traing dataset
+
 
 This is the fifth in [a series of tutorials](https://github.com/sgrvinod/Deep-Tutorials-for-PyTorch) I'm writing about _implementing_ cool models on your own with the amazing PyTorch library.
 
