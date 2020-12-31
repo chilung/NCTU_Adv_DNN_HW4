@@ -15,7 +15,7 @@ parser.add_argument('-c', '--checkpoint', help='the path to the model checkpoint
 args = parser.parse_args()
 print('chechpoint: {}'.format(args.checkpoint))
 print('root: {}'.format(args.root))
-print('epoch: {}'.format(args.epoch))
+# print('epoch: {}'.format(args.epoch))
     
 # Data parameters
 data_folder = './'  # folder with JSON data files
