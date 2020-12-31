@@ -97,7 +97,8 @@ def main():
               epoch=epoch)
 
         # Save checkpoint
-        torch.save({'epoch': epoch,
+        if epoch % 500:
+            torch.save({'epoch': epoch,
                     'model': model,
                     'optimizer': optimizer},
                     os.path.join(checkpoint_path, 'checkpoint_srresnet_{}.pth.tar'.format(epoch)))
