@@ -4,12 +4,13 @@ from torch import nn
 from models import Generator, Discriminator, TruncatedVGG19
 from datasets import SRDataset
 from utils import *
+from IPython.display import clear_output
 
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('-r', '--root', help='the path to the root directory of model checkpoint, such as ./checkpoint')
 parser.add_argument('-c', '--checkpoint', help='the path to the model checkpoint, such as checkpoint_8100_srgan.pth.tar')
-parser.add_argument('-e', '--epoch', type=int, help='the maximum epoches of the training phase should run.')
+# parser.add_argument('-e', '--epoch', type=int, help='the maximum epoches of the training phase should run.')
 
 args = parser.parse_args()
 print('chechpoint: {}'.format(args.checkpoint))
@@ -46,8 +47,8 @@ checkpoint = args.checkpoint  # path to model (SRGAN) checkpoint, None if not sp
 # Learning parameters
 batch_size = 16  # batch size
 start_epoch = 0  # start at this epoch
-iterations = 2e5  # number of training iterations
-epochs = args.epoch if not args.epoch==None else 2000
+iterations = 1000000  # number of training iterations
+# epochs = args.epoch if not args.epoch==None else 2000
 workers = 4  # number of workers for loading data in the DataLoader
 vgg19_i = 5  # the index i in the definition for VGG loss; see paper or models.py
 vgg19_j = 4  # the index j in the definition for VGG loss; see paper or models.py
@@ -62,11 +63,11 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 cudnn.benchmark = True
 
-lr_base  = {15000: 0.1, 25000:0.1, 30000: 0.1, 35000: 0.1}
-def lr_table(epoch):
-    if epoch in lr_base:
-        return lr_base[epoch]
-    return 1
+# lr_base  = {15000: 0.1, 25000:0.1, 30000: 0.1, 35000: 0.1}
+# def lr_table(epoch):
+#     if epoch in lr_base:
+#         return lr_base[epoch]
+#     return 1
 
 def main():
     """
@@ -148,14 +149,15 @@ def main():
     for epoch in range(start_epoch, epochs):
 
         # At the halfway point, reduce learning rate to a tenth
-        # if epoch == int((iterations / 2) // len(train_loader) + 1):
-        #     adjust_learning_rate(optimizer_g, 0.1)
-        #     adjust_learning_rate(optimizer_d, 0.1)
-        adjust_rate = lr_table(epoch)
-        if not adjust_rate == 1:
-            print('adjust learning rate by {}'.format(adjust_rate))
-            adjust_learning_rate(optimizer_g, adjust_rate)
-            adjust_learning_rate(optimizer_d, adjust_rate)
+        if epoch == int((iterations / 2) // len(train_loader) + 1):
+            adjust_learning_rate(optimizer_g, 0.1)
+            adjust_learning_rate(optimizer_d, 0.1)
+        
+        # adjust_rate = lr_table(epoch)
+        # if not adjust_rate == 1:
+        #     print('adjust learning rate by {}'.format(adjust_rate))
+        #     adjust_learning_rate(optimizer_g, adjust_rate)
+        #     adjust_learning_rate(optimizer_d, adjust_rate)
 
         # One epoch's training
         train(train_loader=train_loader,
@@ -176,6 +178,7 @@ def main():
                     'optimizer_g': optimizer_g,
                     'optimizer_d': optimizer_d},
                     os.path.join(checkpoint_path, 'checkpoint_{}_srgan.pth.tar'.format(epoch)))
+            clear_output(wait=False)
 
 
 def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_criterion, adversarial_loss_criterion,
