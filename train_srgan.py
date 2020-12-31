@@ -8,9 +8,11 @@ from utils import *
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('-c', '--checkpoint', help='the path to the model checkpoint, such as checkpoint_8100_srgan.pth.tar')
+parser.add_argument('-e', '--epoch', help='the maximum epoches of the training phase should run.')
 
 args = parser.parse_args()
 print('chechpoint: {}'.format(args.checkpoint))
+print('epoch: {}'.format(args.epoch))
     
 # Data parameters
 data_folder = './'  # folder with JSON data files
@@ -33,11 +35,11 @@ fc_size_d = 1024  # size of the first fully connected layer
 
 # Learning parameters
 # checkpoint = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_2/checkpoint_8100_srgan.pth.tar'  # path to model (SRGAN) checkpoint, None if none
-checkpoint = None  # path to model (SRGAN) checkpoint, None if none
+checkpoint = args.checkpoint  # path to model (SRGAN) checkpoint, None if not specified
 batch_size = 16  # batch size
 start_epoch = 0  # start at this epoch
 iterations = 2e5  # number of training iterations
-epochs = 40001
+epochs = args.args.epoch if not args.args.epoch==None else 2000
 workers = 4  # number of workers for loading data in the DataLoader
 vgg19_i = 5  # the index i in the definition for VGG loss; see paper or models.py
 vgg19_j = 4  # the index j in the definition for VGG loss; see paper or models.py
