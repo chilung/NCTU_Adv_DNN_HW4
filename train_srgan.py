@@ -7,10 +7,11 @@ from utils import *
 
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument("echo", help="echo the string you use here")
+parser.add_argument('-c', '--checkpoint', help='the path to the model checkpoint, such as checkpoint_8100_srgan.pth.tar')
 
-parser.parse_args()
-
+args = parser.parse_args()
+print(args.checkpoint)
+    
 # Data parameters
 data_folder = './'  # folder with JSON data files
 crop_size = 96  # crop size of target HR images
