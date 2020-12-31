@@ -5,11 +5,22 @@ from torch import nn
 from models import SRResNet
 from datasets import SRDataset
 from utils import *
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('-r', '--root', help='the path to the root directory of model checkpoint, such as ./checkpoint')
+parser.add_argument('-c', '--checkpoint', help='the path to the model checkpoint, such as checkpoint_8100_srgan.pth.tar')
+# parser.add_argument('-e', '--epoch', type=int, help='the maximum epoches of the training phase should run.')
+
+args = parser.parse_args()
+print('chechpoint: {}'.format(args.checkpoint))
+print('root: {}'.format(args.root))
+# print('epoch: {}'.format(args.epoch))
 
 # Data parameters
 data_folder = './'  # folder with JSON data files
 crop_size = 96  # crop size of target HR images
-scaling_factor = 4  # the scaling factor for the generator; the input LR images will be downsampled from the target HR images by this factor
+# scaling_factor = 4  # the scaling factor for the generator; the input LR images will be downsampled from the target HR images by this factor
+scaling_factor = 3  # the scaling factor for the generator; the input LR images will be downsampled from the target HR images by this factor
 
 # Model parameters
 large_kernel_size = 9  # kernel size of the first and last convolutions which transform the inputs and outputs
@@ -31,6 +42,13 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 cudnn.benchmark = True
 
+# checkpoint output directory
+# checkpoint_path = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_2'
+checkpoint_path = args.root if not args.root==None else './'
+os.makedirs(checkpoint_path, exist_ok=True)
+
+# checkpoint = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_2/checkpoint_srresnet_8100.pth.tar'  # path to model (SRGAN) checkpoint, None if none
+checkpoint = args.checkpoint  # path to model (SRGAN) checkpoint, None if not specified
 
 def main():
     """
@@ -82,8 +100,7 @@ def main():
         torch.save({'epoch': epoch,
                     'model': model,
                     'optimizer': optimizer},
-                   'checkpoint_srresnet.pth.tar')
-
+                    os.path.join(checkpoint_path, 'checkpoint_srresnet_{}.pth.tar'.format(epoch)))
 
 def train(train_loader, model, criterion, optimizer, epoch):
     """
