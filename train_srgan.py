@@ -54,6 +54,7 @@ grad_clip = None  # clip if gradients are exploding
 # checkpoint output directory
 # checkpoint_path = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_2'
 checkpoint_path = args.root if not args.root==None else './'
+os.makedirs(checkpoint_path, exist_ok=True)
 
 # Default device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
