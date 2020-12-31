@@ -27,7 +27,7 @@ large_kernel_size_g = 9  # kernel size of the first and last convolutions which 
 small_kernel_size_g = 3  # kernel size of all convolutions in-between, i.e. those in the residual and subpixel convolutional blocks
 n_channels_g = 64  # number of channels in-between, i.e. the input and output channels for the residual and subpixel convolutional blocks
 n_blocks_g = 16  # number of residual blocks
-srresnet_checkpoint = "./checkpoint_srresnet.pth.tar"  # filepath of the trained SRResNet checkpoint used for initialization
+# srresnet_checkpoint = "./checkpoint_srresnet.pth.tar"  # filepath of the trained SRResNet checkpoint used for initialization
 
 # Discriminator parameters
 kernel_size_d = 3  # kernel size in all convolutional blocks
@@ -35,9 +35,15 @@ n_channels_d = 64  # number of output channels in the first convolutional block,
 n_blocks_d = 8  # number of convolutional blocks
 fc_size_d = 1024  # size of the first fully connected layer
 
-# Learning parameters
+# checkpoint output directory
+# checkpoint_path = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_2'
+checkpoint_path = args.root if not args.root==None else './'
+os.makedirs(checkpoint_path, exist_ok=True)
+
 # checkpoint = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_2/checkpoint_8100_srgan.pth.tar'  # path to model (SRGAN) checkpoint, None if none
 checkpoint = os.path.join(args.root, args.checkpoint)  # path to model (SRGAN) checkpoint, None if not specified
+
+# Learning parameters
 batch_size = 16  # batch size
 start_epoch = 0  # start at this epoch
 iterations = 2e5  # number of training iterations
@@ -51,11 +57,6 @@ lr = 1e-4  # learning rate
 # lr = 1e-2  # learning rate
 grad_clip = None  # clip if gradients are exploding
 
-# checkpoint output directory
-# checkpoint_path = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_2'
-checkpoint_path = args.root if not args.root==None else './'
-os.makedirs(checkpoint_path, exist_ok=True)
-
 # Default device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -65,7 +66,6 @@ lr_base  = {15000: 0.1, 25000:0.1, 30000: 0.1, 35000: 0.1}
 def lr_table(epoch):
     if epoch in lr_base:
         return lr_base[epoch]
-
     return 1
 
 def main():
