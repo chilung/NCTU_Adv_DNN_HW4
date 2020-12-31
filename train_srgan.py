@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-c', '--checkpoint', help='the path to the model checkpoint, such as checkpoint_8100_srgan.pth.tar')
 
 args = parser.parse_args()
-print(args.checkpoint)
+print('chechpoint: {}'.format(args.checkpoint))
     
 # Data parameters
 data_folder = './'  # folder with JSON data files
