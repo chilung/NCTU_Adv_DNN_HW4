@@ -5,6 +5,10 @@ from models import Generator, Discriminator, TruncatedVGG19
 from datasets import SRDataset
 from utils import *
 
+import argparse
+parser = argparse.ArgumentParser()
+parser.parse_args()
+
 # Data parameters
 data_folder = './'  # folder with JSON data files
 crop_size = 96  # crop size of target HR images
