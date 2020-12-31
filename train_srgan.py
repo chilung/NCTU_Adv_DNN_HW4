@@ -47,7 +47,7 @@ checkpoint = args.checkpoint  # path to model (SRGAN) checkpoint, None if not sp
 # Learning parameters
 batch_size = 16  # batch size
 start_epoch = 0  # start at this epoch
-iterations = 1000000  # number of training iterations
+iterations = 200000  # number of training iterations
 # epochs = args.epoch if not args.epoch==None else 2000
 workers = 4  # number of workers for loading data in the DataLoader
 vgg19_i = 5  # the index i in the definition for VGG loss; see paper or models.py
