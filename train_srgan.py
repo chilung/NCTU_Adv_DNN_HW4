@@ -7,11 +7,13 @@ from utils import *
 
 import argparse
 parser = argparse.ArgumentParser()
+parser.add_argument('-r', '--root', help='the path to the root directory of model checkpoint, such as ./checkpoint')
 parser.add_argument('-c', '--checkpoint', help='the path to the model checkpoint, such as checkpoint_8100_srgan.pth.tar')
 parser.add_argument('-e', '--epoch', type=int, help='the maximum epoches of the training phase should run.')
 
 args = parser.parse_args()
 print('chechpoint: {}'.format(args.checkpoint))
+print('root: {}'.format(args.root))
 print('epoch: {}'.format(args.epoch))
     
 # Data parameters
@@ -35,7 +37,7 @@ fc_size_d = 1024  # size of the first fully connected layer
 
 # Learning parameters
 # checkpoint = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_2/checkpoint_8100_srgan.pth.tar'  # path to model (SRGAN) checkpoint, None if none
-checkpoint = args.checkpoint  # path to model (SRGAN) checkpoint, None if not specified
+checkpoint = os.path.join(args.root, args.checkpoint)  # path to model (SRGAN) checkpoint, None if not specified
 batch_size = 16  # batch size
 start_epoch = 0  # start at this epoch
 iterations = 2e5  # number of training iterations
@@ -51,7 +53,7 @@ grad_clip = None  # clip if gradients are exploding
 
 # checkpoint output directory
 # checkpoint_path = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_2'
-checkpoint_path = './checkpoint_3x_2'
+checkpoint_path = args.root if not args.root==None else './'
 
 # Default device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
