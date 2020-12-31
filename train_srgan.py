@@ -177,7 +177,7 @@ def main():
                     'discriminator': discriminator,
                     'optimizer_g': optimizer_g,
                     'optimizer_d': optimizer_d},
-                    os.path.join(checkpoint_path, 'checkpoint_{}_srgan.pth.tar'.format(epoch)))
+                    os.path.join(checkpoint_path, 'checkpoint_srgan_{}.pth.tar'.format(epoch)))
             clear_output(wait=False)
 
 
