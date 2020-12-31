@@ -41,7 +41,7 @@ checkpoint_path = args.root if not args.root==None else './'
 os.makedirs(checkpoint_path, exist_ok=True)
 
 # checkpoint = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_2/checkpoint_8100_srgan.pth.tar'  # path to model (SRGAN) checkpoint, None if none
-checkpoint = os.path.join(args.root, args.checkpoint)  # path to model (SRGAN) checkpoint, None if not specified
+checkpoint = args.checkpoint  # path to model (SRGAN) checkpoint, None if not specified
 
 # Learning parameters
 batch_size = 16  # batch size
@@ -104,6 +104,7 @@ def main():
                                        lr=lr)
 
     else:
+        checkpoint = os.path.join(args.root, args.checkpoint)
         checkpoint = torch.load(checkpoint)
         start_epoch = checkpoint['epoch'] + 1
         generator = checkpoint['generator']
