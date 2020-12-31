@@ -65,6 +65,7 @@ def main():
                                      lr=lr)
 
     else:
+        checkpoint = os.path.join(args.root, args.checkpoint)
         checkpoint = torch.load(checkpoint)
         start_epoch = checkpoint['epoch'] + 1
         model = checkpoint['model']
