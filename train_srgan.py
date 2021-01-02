@@ -86,7 +86,7 @@ def main():
                               scaling_factor=scaling_factor)
 
         # Initialize generator network with pretrained SRResNet
-        generator.initialize_with_srresnet(srresnet_checkpoint=os.path.join(args.root, srresnet_checkpoint)l
+        generator.initialize_with_srresnet(srresnet_checkpoint=os.path.join(args.root, srresnet_checkpoint))
 
         # Initialize generator's optimizer
         optimizer_g = torch.optim.Adam(params=filter(lambda p: p.requires_grad, generator.parameters()),
