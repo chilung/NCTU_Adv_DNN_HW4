@@ -33,7 +33,13 @@ optional arguments:
                         the path to the model checkpoint where the resume training from, such as checkpoint_srgan_8100.pth.tar
   -s SRRESNET, --srresnet SRRESNET
                         the filepath of the trained SRResNet checkpoint used for initialization, such as checkpoint_srresnet.pth.tar</code></pre>
-                        
+<pre><code>!python output_sr.py --help
+usage: output_sr.py [-h] [-o OUTPUT] [-g GAN]
+optional arguments:
+  -h, --help            show this help message and exit
+  -o OUTPUT, --output OUTPUT
+                        the path to the output directory of super resolution images.
+  -g GAN, --gan GAN     the full file path to the super resolution model checkpoint, such as checkpoint_srgan.pth.tar</code></pre>
                         
                         
 This is the fifth in [a series of tutorials](https://github.com/sgrvinod/Deep-Tutorials-for-PyTorch) I'm writing about _implementing_ cool models on your own with the amazing PyTorch library.
