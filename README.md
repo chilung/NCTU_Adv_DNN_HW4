@@ -18,7 +18,6 @@ reference github: [Tutorial to Super-Resolution](https://github.com/sgrvinod/a-P
 According to the [paper](https://arxiv.org/abs/1609.04802): "We employed the trained MSE-based SRResNet network as initialization for the generator when training the actual GAN to avoid undesired local optima.The SRResNet networks were trained with a learning rate of 10^-4 and 10^6 update iterations.
 <pre><code>!python train_srresnet.py --help
 usage: train_srresnet.py [-h] [-r ROOT] [-c CHECKPOINT]
-
 optional arguments:
   -h, --help            show this help message and exit
   -r ROOT, --root ROOT  the path to the root directory of model checkpoint, such as ./checkpoint
