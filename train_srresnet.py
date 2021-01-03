@@ -8,7 +8,7 @@ from utils import *
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('-r', '--root', help='the path to the root directory of model checkpoint, such as ./checkpoint')
-parser.add_argument('-c', '--checkpoint', help='the path to the model checkpoint, such as checkpoint_8100_srgan.pth.tar')
+parser.add_argument('-c', '--checkpoint', help='the path to the model checkpoint where the resume training from, such as checkpoint_8100_srgan.pth.tar')
 # parser.add_argument('-e', '--epoch', type=int, help='the maximum epoches of the training phase should run.')
 
 args = parser.parse_args()
