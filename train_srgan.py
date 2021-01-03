@@ -15,7 +15,6 @@ parser.add_argument('-s', '--srresnet', help='the filepath of the trained SRResN
 args = parser.parse_args()
 print('chechpoint: {}'.format(args.checkpoint))
 print('root: {}'.format(args.root))
-# print('epoch: {}'.format(args.epoch))
     
 # Data parameters
 data_folder = './'  # folder with JSON data files
@@ -75,7 +74,6 @@ def main():
     # Initialize model or load checkpoint
     if checkpoint is None:
         # Generator
-        print('File: {}, Func: {}, Line: {}, scaling_factor: {}'.format('train_srgan', 'main', 59, scaling_factor))
         generator = Generator(large_kernel_size=large_kernel_size_g,
                               small_kernel_size=small_kernel_size_g,
                               n_channels=n_channels_g,
