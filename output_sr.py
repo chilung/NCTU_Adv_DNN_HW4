@@ -9,23 +9,19 @@ import datetime
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('-o', '--output', help='the path to the output directory of super resolution images.')
-parser.add_argument('-g', '--gan', help='the full file path to the super resolution model checkpoint, such as checkpoint_srgan_10520.pth.tar')
-# parser.add_argument('-e', '--epoch', type=int, help='the maximum epoches of the training phase should run.')
+parser.add_argument('-g', '--gan', help='the full file path to the super resolution model checkpoint, such as checkpoint_srgan.pth.tar')
 
 args = parser.parse_args()
 print('output: {}'.format(args.output))
 print('gan model: {}'.format(args.gan))
-# print('epoch: {}'.format(args.epoch))
 
 testing_path = './testing_lr_images'
 output_path = args.output
-# output_path = './output_sr_3x_2'
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Model checkpoints
 srgan_checkpoint = args.gan
-# srgan_checkpoint = './checkpoint_3x_2/checkpoint_40000_srgan.pth.tar'
 print('device: {}, srgan: {} '.format(device, srgan_checkpoint))
 
 # Load models
