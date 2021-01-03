@@ -6,14 +6,25 @@ from utils import *
 from PIL import Image, ImageDraw, ImageFont
 import datetime
 
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('-o', '--output', help='the path to the output directory of super resolution images.')
+parser.add_argument('-g', '--gan', help='the full file path to the super resolution model checkpoint, such as checkpoint_srgan_10520.pth.tar')
+# parser.add_argument('-e', '--epoch', type=int, help='the maximum epoches of the training phase should run.')
+
+args = parser.parse_args()
+print('output: {}'.format(args.output))
+print('gan model: {}'.format(args.gan))
+# print('epoch: {}'.format(args.epoch))
+
 testing_path = './testing_lr_images'
-output_path = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/output_sr_golden'
+output_path = args.output
 # output_path = './output_sr_3x_2'
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Model checkpoints
-srgan_checkpoint = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_golden_model/checkpoint_srgan.pth.tar'
+srgan_checkpoint = args.gan
 # srgan_checkpoint = './checkpoint_3x_2/checkpoint_40000_srgan.pth.tar'
 print('device: {}, srgan: {} '.format(device, srgan_checkpoint))
 
