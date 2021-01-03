@@ -9,7 +9,6 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('-r', '--root', help='the path to the root directory of model checkpoint, such as ./checkpoint')
 parser.add_argument('-c', '--checkpoint', help='the path to the model checkpoint where the resume training from, such as checkpoint_8100_srgan.pth.tar')
-# parser.add_argument('-e', '--epoch', type=int, help='the maximum epoches of the training phase should run.')
 
 args = parser.parse_args()
 print('chechpoint: {}'.format(args.checkpoint))
@@ -42,13 +41,10 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 cudnn.benchmark = True
 
-# checkpoint output directory
-# checkpoint_path = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_2'
 checkpoint_path = args.root if not args.root==None else './'
 os.makedirs(checkpoint_path, exist_ok=True)
 
-# checkpoint = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_2/checkpoint_srresnet_8100.pth.tar'  # path to model (SRGAN) checkpoint, None if none
-checkpoint = args.checkpoint  # path to model (SRGAN) checkpoint, None if not specified
+checkpoint = args.checkpoint  # path to model (SRRESNET) checkpoint where the resume training from, None if not specified
 
 def main():
     """
