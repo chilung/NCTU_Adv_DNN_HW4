@@ -1,6 +1,7 @@
 # Reference
 reference github: [Tutorial to Super-Resolution](https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Super-Resolution)
-
+# Paper Reference
+[Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](https://arxiv.org/abs/1609.04802)
 # README
 1. clone github
 <pre><code>!git clone https://github.com/chilung/NCTU_Adv_DNN_HW4.git
@@ -12,7 +13,11 @@ reference github: [Tutorial to Super-Resolution](https://github.com/sgrvinod/a-P
 './training_hr_images/15004.png'
 ...
 </code></pre>
-
+## Training
+### Phase 1 - training srresnet
+We employed the trained MSE-based SRResNet
+network as initialization for the generator when training
+the actual GAN to avoid undesired local optima.
 This is the fifth in [a series of tutorials](https://github.com/sgrvinod/Deep-Tutorials-for-PyTorch) I'm writing about _implementing_ cool models on your own with the amazing PyTorch library.
 
 Basic knowledge of PyTorch, convolutional neural networks is assumed.
