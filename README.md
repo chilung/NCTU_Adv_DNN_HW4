@@ -22,8 +22,20 @@ optional arguments:
   -h, --help            show this help message and exit
   -r ROOT, --root ROOT  the path to the root directory of model checkpoint, such as ./checkpoint
   -c CHECKPOINT, --checkpoint CHECKPOINT
-                        the path to the model checkpoint where the resume training from, such as checkpoint_8100_srgan.pth.tar
-</code></pre>
+                        the path to the model checkpoint where the resume training from, such as checkpoint_srresnet_8100.pth.tar</code></pre>
+
+<pre><code>!python train_srgan.py --help
+usage: train_srgan.py [-h] [-r ROOT] [-c CHECKPOINT] [-s SRRESNET]
+optional arguments:
+  -h, --help            show this help message and exit
+  -r ROOT, --root ROOT  the path to the root directory of model checkpoint, such as ./checkpoint
+  -c CHECKPOINT, --checkpoint CHECKPOINT
+                        the path to the model checkpoint where the resume training from, such as checkpoint_srgan_8100.pth.tar
+  -s SRRESNET, --srresnet SRRESNET
+                        the filepath of the trained SRResNet checkpoint used for initialization, such as checkpoint_srresnet.pth.tar</code></pre>
+                        
+                        
+                        
 This is the fifth in [a series of tutorials](https://github.com/sgrvinod/Deep-Tutorials-for-PyTorch) I'm writing about _implementing_ cool models on your own with the amazing PyTorch library.
 
 Basic knowledge of PyTorch, convolutional neural networks is assumed.
