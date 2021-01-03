@@ -10,7 +10,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('-r', '--root', help='the path to the root directory of model checkpoint, such as ./checkpoint')
 parser.add_argument('-c', '--checkpoint', help='the path to the model checkpoint where the resume training from, such as checkpoint_srgan_8100.pth.tar')
-# parser.add_argument('-e', '--epoch', type=int, help='the maximum epoches of the training phase should run.')
+parser.add_argument('-s', '--srresnet', help='the filepath of the trained SRResNet checkpoint used for initialization, such as checkpoint_srresnet.pth.tar')
 
 args = parser.parse_args()
 print('chechpoint: {}'.format(args.checkpoint))
@@ -28,7 +28,7 @@ large_kernel_size_g = 9  # kernel size of the first and last convolutions which 
 small_kernel_size_g = 3  # kernel size of all convolutions in-between, i.e. those in the residual and subpixel convolutional blocks
 n_channels_g = 64  # number of channels in-between, i.e. the input and output channels for the residual and subpixel convolutional blocks
 n_blocks_g = 16  # number of residual blocks
-srresnet_checkpoint = "checkpoint_srresnet_52630.pth.tar"  # filepath of the trained SRResNet checkpoint used for initialization
+srresnet_checkpoint = args.srresnet  # filepath of the trained SRResNet checkpoint used for initialization
 
 # Discriminator parameters
 kernel_size_d = 3  # kernel size in all convolutional blocks
@@ -36,12 +36,9 @@ n_channels_d = 64  # number of output channels in the first convolutional block,
 n_blocks_d = 8  # number of convolutional blocks
 fc_size_d = 1024  # size of the first fully connected layer
 
-# checkpoint output directory
-# checkpoint_path = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_2'
 checkpoint_path = args.root if not args.root==None else './'
 os.makedirs(checkpoint_path, exist_ok=True)
 
-# checkpoint = '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_2/checkpoint_8100_srgan.pth.tar'  # path to model (SRGAN) checkpoint, None if none
 checkpoint = args.checkpoint  # path to model (SRGAN) checkpoint, None if not specified
 
 # Learning parameters
