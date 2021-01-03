@@ -16,7 +16,8 @@ reference github: [Tutorial to Super-Resolution](https://github.com/sgrvinod/a-P
 ## Training
 ### Phase 1 - training srresnet
 According to the [paper](https://arxiv.org/abs/1609.04802): "We employed the trained MSE-based SRResNet network as initialization for the generator when training the actual GAN to avoid undesired local optima.The SRResNet networks were trained with a learning rate of 10^-4 and 10^6 update iterations.
-
+<pre><code>!python train_srresnet.py -r '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_3' -c 'checkpoint_srresnet_52000.pth.tar'
+</code></pre>
 This is the fifth in [a series of tutorials](https://github.com/sgrvinod/Deep-Tutorials-for-PyTorch) I'm writing about _implementing_ cool models on your own with the amazing PyTorch library.
 
 Basic knowledge of PyTorch, convolutional neural networks is assumed.
