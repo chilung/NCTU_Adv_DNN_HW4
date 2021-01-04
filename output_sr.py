@@ -46,8 +46,8 @@ for testing_file in testing_files:
     sr_img_srgan = sr_img_srgan.squeeze(0).cpu().detach()
     sr_img_srgan = convert_image(sr_img_srgan, source='[-1, 1]', target='pil')
     
-    sr_img_srgan.save(join(output_path, testing_file))
-    print(' Done')
+    sr_img_srgan.save(join(output_path+'/gan', testing_file))
+    print('SRGAN Done')
     
 # Load srresnet models
 if args.resnet != None:
@@ -65,10 +65,10 @@ if args.resnet != None:
         lr_img = Image.open(join(testing_path, testing_file), mode="r")
         lr_img = lr_img.convert('RGB')
         print('processing: {}'.format(testing_file), end = '')
-    
-        sr_img_srgan = srgan_generator(convert_image(lr_img, source='pil', target='imagenet-norm').unsqueeze(0).to(device))
-        sr_img_srgan = sr_img_srgan.squeeze(0).cpu().detach()
-        sr_img_srgan = convert_image(sr_img_srgan, source='[-1, 1]', target='pil')
-    
-        sr_img_srgan.save(join(output_path, testing_file))
-        print(' Done')
+
+        sr_img_srresnet = srresnet(convert_image(lr_img, source='pil', target='imagenet-norm').unsqueeze(0).to(device))
+        sr_img_srresnet = sr_img_srresnet.squeeze(0).cpu().detach()
+        sr_img_srresnet = convert_image(sr_img_srresnet, source='[-1, 1]', target='pil')
+
+        sr_img_srresnet.save(join(output_path+'/resnet', testing_file))
+        print('SRResNet Done')
