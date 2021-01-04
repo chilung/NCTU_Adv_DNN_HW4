@@ -23,7 +23,8 @@ optional arguments:
   -r ROOT, --root ROOT  the path to the root directory of model checkpoint, such as ./checkpoint
   -c CHECKPOINT, --checkpoint CHECKPOINT
                         the path to the model checkpoint where the resume training from, such as checkpoint_srresnet_8100.pth.tar</code></pre>
-
+### Phase 2 - training srgan
+According to the [paper](https://arxiv.org/abs/1609.04802): "SRGAN was trained with 10^5 update iterations at a learning rate of 10^−4 and another 10^5 iterations at a lower rate of 10^−5"
 <pre><code>!python train_srgan.py --help
 usage: train_srgan.py [-h] [-r ROOT] [-c CHECKPOINT] [-s SRRESNET]
 optional arguments:
@@ -33,6 +34,7 @@ optional arguments:
                         the path to the model checkpoint where the resume training from, such as checkpoint_srgan_8100.pth.tar
   -s SRRESNET, --srresnet SRRESNET
                         the filepath of the trained SRResNet checkpoint used for initialization, such as checkpoint_srresnet.pth.tar</code></pre>
+### Super Resolution
 <pre><code>!python output_sr.py --help
 usage: output_sr.py [-h] [-o OUTPUT] [-g GAN]
 optional arguments:
