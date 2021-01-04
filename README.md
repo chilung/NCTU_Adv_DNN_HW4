@@ -2,7 +2,7 @@
 reference github: [Tutorial to Super-Resolution](https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Super-Resolution)
 # Paper Reference
 [Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](https://arxiv.org/abs/1609.04802)
-# README
+# Reproducibility
 1. clone github
 <pre><code>!git clone https://github.com/chilung/NCTU_Adv_DNN_HW4.git
 %cd /content/NCTU_Adv_DNN_HW4
