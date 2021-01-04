@@ -53,7 +53,7 @@ if args.gan != None:
 # Load srresnet models
 if args.resnet != None:
     srresnet_checkpoint = args.resnet
-    print('device: {}, srresnet: {} '.format(device, srgan_checkpoint))
+    print('device: {}, srresnet: {} '.format(device, srresnet_checkpoint))
 
     srresnet = torch.load(srresnet_checkpoint)['model'].to(device)
     srresnet.eval()
