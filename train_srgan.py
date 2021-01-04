@@ -223,7 +223,8 @@ def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_
         sr_discriminated = discriminator(sr_imgs)  # (N)
 
         # Calculate the Perceptual loss
-        content_loss = content_loss_criterion(sr_imgs_in_vgg_space, hr_imgs_in_vgg_space)
+        # content_loss = content_loss_criterion(sr_imgs_in_vgg_space, hr_imgs_in_vgg_space)
+        content_loss = content_loss_criterion(sr_imgs, hr_imgs) # Use original image
         adversarial_loss = adversarial_loss_criterion(sr_discriminated, torch.ones_like(sr_discriminated))
         perceptual_loss = content_loss + beta * adversarial_loss
 
