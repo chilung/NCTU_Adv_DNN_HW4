@@ -23,7 +23,7 @@ output_path = args.output
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Model checkpoints
-if args.resnet != None:
+if args.gan != None:
     srgan_checkpoint = args.gan
     print('device: {}, srgan: {} '.format(device, srgan_checkpoint))
 
