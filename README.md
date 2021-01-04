@@ -7,7 +7,7 @@ reference github: [Tutorial to Super-Resolution](https://github.com/sgrvinod/a-P
 <pre><code>!git clone https://github.com/chilung/NCTU_Adv_DNN_HW4.git
 %cd /content/NCTU_Adv_DNN_HW4
 </code></pre>
-2. download traing dataset
+2. download training dataset
 3. produce file `./train_images.json` in root and contain the training filename list, such as:
 <pre><code>'./training_hr_images/92059.png'
 './training_hr_images/15004.png'
