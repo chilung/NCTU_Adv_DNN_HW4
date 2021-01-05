@@ -12,11 +12,13 @@ parser.add_argument('-r', '--root', help='the path to the root directory of mode
 parser.add_argument('-c', '--checkpoint', help='the path to the model checkpoint where the resume training from, such as checkpoint_srgan_8100.pth.tar')
 parser.add_argument('-s', '--srresnet', help='the filepath of the trained SRResNet checkpoint used for initialization, such as checkpoint_srresnet.pth.tar')
 parser.add_argument('-v', '--vggloss', action='store_true', default=False, help='set True to apply vgg on the loss function')
+parser.add_argument('-e', '--epochs', type=int, default=0, help='number of epochs')
 
 args = parser.parse_args()
 print('root: {}'.format(args.root))
 print('chechpoint: {}'.format(args.checkpoint))
 print('loss: {}'.format(args.vggloss))
+print('epochs: {}'.format(args.epochs))
     
 # Data parameters
 data_folder = './'  # folder with JSON data files
@@ -143,7 +145,10 @@ def main():
     
     # Total number of epochs to train for
     print('iterations: {}'.format(iterations))
-    epochs = int(iterations // len(train_loader) + 1)
+    if args.epochs == 0:
+        epochs = int(iterations // len(train_loader) + 1)
+    else:
+        epochs = args.epochs
     print('length of train_loader: {}'.format(len(train_loader)))
     print('epochs = {}'.format(epochs))
 
