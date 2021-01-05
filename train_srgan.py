@@ -72,8 +72,8 @@ def main():
     """
     Training.
     """
-    global start_epoch, epoch, checkpoint, srresnet_checkpoint, vggloss
-    print(vggloss, arg.vggloss)
+    global start_epoch, epoch, checkpoint, srresnet_checkpoint, vgg_loss_enable
+    print(vgg_loss_enable, args.vggloss)
 
     # Initialize model or load checkpoint
     if checkpoint is None:
