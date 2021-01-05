@@ -153,6 +153,7 @@ def main():
     print('epochs = {}'.format(epochs))
 
     # Epochs
+    print('epochs: {}'.format(epochs))
     for epoch in range(start_epoch, epochs):
 
         # At the halfway point, reduce learning rate to a tenth
@@ -178,7 +179,7 @@ def main():
               epoch=epoch)
 
         # Save checkpoint
-        if epoch % 10 == 0:
+        if epoch % 300 == 0:
             torch.save({'epoch': epoch,
                     'generator': generator,
                     'discriminator': discriminator,
