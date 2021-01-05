@@ -113,6 +113,7 @@ def main():
 
     if vgg_loss_enable:
         # Truncated VGG19 network to be used in the loss calculation
+        print('vggloss enable')
         truncated_vgg19 = TruncatedVGG19(i=vgg19_i, j=vgg19_j)
         truncated_vgg19.eval()
     else:
