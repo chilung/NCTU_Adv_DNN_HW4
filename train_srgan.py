@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-r', '--root', help='the path to the root directory of model checkpoint, such as ./checkpoint')
 parser.add_argument('-c', '--checkpoint', help='the path to the model checkpoint where the resume training from, such as checkpoint_srgan_8100.pth.tar')
 parser.add_argument('-s', '--srresnet', help='the filepath of the trained SRResNet checkpoint used for initialization, such as checkpoint_srresnet.pth.tar')
-parser.add_argument('-v', '--vggloss', type=bool, default=False, help='set True to apply vgg on the loss function')
+parser.add_argument('-v', '--vggloss', action='store_true', default=False, help='set True to apply vgg on the loss function')
 
 args = parser.parse_args()
 print('root: {}'.format(args.root))
