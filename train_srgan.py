@@ -11,10 +11,12 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-r', '--root', help='the path to the root directory of model checkpoint, such as ./checkpoint')
 parser.add_argument('-c', '--checkpoint', help='the path to the model checkpoint where the resume training from, such as checkpoint_srgan_8100.pth.tar')
 parser.add_argument('-s', '--srresnet', help='the filepath of the trained SRResNet checkpoint used for initialization, such as checkpoint_srresnet.pth.tar')
+parser.add_argument('-v', '--vggloss', type=bool, default='False', help='set True to apply vgg on the loss function')
 
 args = parser.parse_args()
-print('chechpoint: {}'.format(args.checkpoint))
 print('root: {}'.format(args.root))
+print('chechpoint: {}'.format(args.checkpoint))
+print('loss: {}'.format(args.vggloss))
     
 # Data parameters
 data_folder = './'  # folder with JSON data files
@@ -46,6 +48,7 @@ start_epoch = 0  # start at this epoch
 iterations = 200000  # number of training iterations
 # epochs = args.epoch if not args.epoch==None else 2000
 workers = 4  # number of workers for loading data in the DataLoader
+vgg_loss_enable = True if args.vggloss==True else False
 vgg19_i = 5  # the index i in the definition for VGG loss; see paper or models.py
 vgg19_j = 4  # the index j in the definition for VGG loss; see paper or models.py
 beta = 1e-3  # the coefficient to weight the adversarial loss in the perceptual loss
@@ -107,9 +110,12 @@ def main():
         optimizer_d = checkpoint['optimizer_d']
         print("\nLoaded checkpoint from epoch %d.\n" % (checkpoint['epoch'] + 1))
 
-    # Truncated VGG19 network to be used in the loss calculation
-    truncated_vgg19 = TruncatedVGG19(i=vgg19_i, j=vgg19_j)
-    truncated_vgg19.eval()
+    if vgg_loss_enable:
+        # Truncated VGG19 network to be used in the loss calculation
+        truncated_vgg19 = TruncatedVGG19(i=vgg19_i, j=vgg19_j)
+        truncated_vgg19.eval()
+    else:
+        truncated_vgg19 = None
 
     # Loss functions
     content_loss_criterion = nn.MSELoss()
@@ -118,7 +124,8 @@ def main():
     # Move to default device
     generator = generator.to(device)
     discriminator = discriminator.to(device)
-    truncated_vgg19 = truncated_vgg19.to(device)
+    if vgg_loss_enable:
+        truncated_vgg19 = truncated_vgg19.to(device)
     content_loss_criterion = content_loss_criterion.to(device)
     adversarial_loss_criterion = adversarial_loss_criterion.to(device)
 
@@ -215,16 +222,19 @@ def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_
         sr_imgs = generator(lr_imgs)  # (N, 3, 96, 96), in [-1, 1]
         sr_imgs = convert_image(sr_imgs, source='[-1, 1]', target='imagenet-norm')  # (N, 3, 96, 96), imagenet-normed
 
-        # Calculate VGG feature maps for the super-resolved (SR) and high resolution (HR) images
-        sr_imgs_in_vgg_space = truncated_vgg19(sr_imgs)
-        hr_imgs_in_vgg_space = truncated_vgg19(hr_imgs).detach()  # detached because they're constant, targets
+        if truncated_vgg19 != None:
+            # Calculate VGG feature maps for the super-resolved (SR) and high resolution (HR) images
+            sr_imgs_in_vgg_space = truncated_vgg19(sr_imgs)
+            hr_imgs_in_vgg_space = truncated_vgg19(hr_imgs).detach()  # detached because they're constant, targets
 
         # Discriminate super-resolved (SR) images
         sr_discriminated = discriminator(sr_imgs)  # (N)
 
         # Calculate the Perceptual loss
-        # content_loss = content_loss_criterion(sr_imgs_in_vgg_space, hr_imgs_in_vgg_space)
-        content_loss = content_loss_criterion(sr_imgs, hr_imgs) # Use original image
+        if truncated_vgg19 != None:
+            content_loss = content_loss_criterion(sr_imgs_in_vgg_space, hr_imgs_in_vgg_space)
+        else:
+            content_loss = content_loss_criterion(sr_imgs, hr_imgs) # Use original image
         adversarial_loss = adversarial_loss_criterion(sr_discriminated, torch.ones_like(sr_discriminated))
         perceptual_loss = content_loss + beta * adversarial_loss
 
