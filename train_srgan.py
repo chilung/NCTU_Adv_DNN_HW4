@@ -226,6 +226,9 @@ def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_
             # Calculate VGG feature maps for the super-resolved (SR) and high resolution (HR) images
             sr_imgs_in_vgg_space = truncated_vgg19(sr_imgs)
             hr_imgs_in_vgg_space = truncated_vgg19(hr_imgs).detach()  # detached because they're constant, targets
+        else:
+            sr_imgs_in_vgg_space = sr_imgs
+            hr_imgs_in_vgg_space = hr_imgs  
 
         # Discriminate super-resolved (SR) images
         sr_discriminated = discriminator(sr_imgs)  # (N)
