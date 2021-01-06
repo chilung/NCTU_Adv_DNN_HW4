@@ -54,7 +54,8 @@ workers = 4  # number of workers for loading data in the DataLoader
 vgg_loss_enable = True if args.vggloss==True else False
 vgg19_i = 5  # the index i in the definition for VGG loss; see paper or models.py
 vgg19_j = 4  # the index j in the definition for VGG loss; see paper or models.py
-beta = 1e-3  # the coefficient to weight the adversarial loss in the perceptual loss
+# beta = 1e-3  # the coefficient to weight the adversarial loss in the perceptual loss
+beta = 1e-2  # the coefficient to weight the adversarial loss in the perceptual loss
 print_freq = 500  # print training status once every __ batches
 lr = 1e-4 # learning rate
 # lr = 1e-2  # learning rate
