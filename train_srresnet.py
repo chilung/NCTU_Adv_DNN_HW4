@@ -41,7 +41,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 cudnn.benchmark = True
 
-checkpoint_path = args.root if not args.root==None else './'
+checkpoint_path = args.root if not args.root == None else './'
 os.makedirs(checkpoint_path, exist_ok=True)
 
 checkpoint = args.checkpoint  # path to model (SRRESNET) checkpoint where the resume training from, None if not specified
