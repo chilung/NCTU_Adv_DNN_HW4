@@ -13,7 +13,7 @@ parser.add_argument('-c', '--checkpoint', help='the path to the model checkpoint
 parser.add_argument('-s', '--srresnet', help='the filepath of the trained SRResNet checkpoint used for initialization, such as checkpoint_srresnet.pth.tar')
 parser.add_argument('-v', '--vggloss', action='store_true', default=False, help='set True to apply vgg on the loss function')
 parser.add_argument('-e', '--epochs', type=int, default=0, help='number of epochs')
-parser.add_argument('-l', '--lr', type=float, default=1e-4, help='initial learning rate')
+parser.add_argument('-o', '--olr', type=float, help='overwrite learning rate')
 
 args = parser.parse_args()
 print('root: {}'.format(args.root))
@@ -56,7 +56,7 @@ vgg19_i = 5  # the index i in the definition for VGG loss; see paper or models.p
 vgg19_j = 4  # the index j in the definition for VGG loss; see paper or models.py
 beta = 1e-3  # the coefficient to weight the adversarial loss in the perceptual loss
 print_freq = 500  # print training status once every __ batches
-lr = args.epochs  # learning rate
+lr = 1e-4 # learning rate
 # lr = 1e-2  # learning rate
 grad_clip = None  # clip if gradients are exploding
 
