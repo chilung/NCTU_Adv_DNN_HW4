@@ -46,6 +46,7 @@ os.makedirs(checkpoint_path, exist_ok=True)
 
 checkpoint = args.checkpoint  # path to model (SRRESNET) checkpoint where the resume training from, None if not specified
 
+
 def main():
     """
     Training.
@@ -99,6 +100,7 @@ def main():
                     'model': model,
                     'optimizer': optimizer},
                     os.path.join(checkpoint_path, 'checkpoint_srresnet_{}.pth.tar'.format(epoch)))
+
 
 def train(train_loader, model, criterion, optimizer, epoch):
     """
