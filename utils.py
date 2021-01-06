@@ -208,12 +208,26 @@ def save_checkpoint(state, filename):
     torch.save(state, filename)
 
 
+def overwrite_learning_rate(optimizer, lr):
+    """
+    set learning rate
+
+    :param optimizer: optimizer whose learning rate must be shrunk.
+    :param lr: learning rate.
+    """
+
+    print("\nset learning rate.")
+    for param_group in optimizer.param_groups:
+        param_group['lr'] = lr
+    print("The new learning rate is %f\n" % (optimizer.param_groups[0]['lr'],))
+
+
 def adjust_learning_rate(optimizer, shrink_factor):
     """
     Shrinks learning rate by a specified factor.
 
     :param optimizer: optimizer whose learning rate must be shrunk.
-    :param shrink_factor: factor in interval (0, 1) to multiply learning rate with.
+    :param learning rate: factor in interval (0, 1) to multiply learning rate with.
     """
 
     print("\nDECAYING learning rate.")
