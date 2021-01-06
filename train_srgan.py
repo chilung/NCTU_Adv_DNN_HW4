@@ -114,6 +114,10 @@ def main():
         optimizer_d = checkpoint['optimizer_d']
         print("\nLoaded checkpoint from epoch %d.\n" % (checkpoint['epoch'] + 1))
 
+    if args.olr != None:
+        overwrite_learning_rate(optimizer_g, args.olr)
+        overwrite_learning_rate(optimizer_d, args.olr)
+
     if vgg_loss_enable:
         # Truncated VGG19 network to be used in the loss calculation
         print('vggloss enable')
