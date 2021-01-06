@@ -20,7 +20,7 @@ print('root: {}'.format(args.root))
 print('chechpoint: {}'.format(args.checkpoint))
 print('loss: {}'.format(args.vggloss))
 print('epochs: {}'.format(args.epochs))
-    
+
 # Data parameters
 data_folder = './'  # folder with JSON data files
 crop_size = 96  # crop size of target HR images
@@ -40,7 +40,7 @@ n_channels_d = 64  # number of output channels in the first convolutional block,
 n_blocks_d = 8  # number of convolutional blocks
 fc_size_d = 1024  # size of the first fully connected layer
 
-checkpoint_path = args.root if not args.root==None else './'
+checkpoint_path = args.root if not args.root == None else './'
 os.makedirs(checkpoint_path, exist_ok=True)
 
 checkpoint = args.checkpoint  # path to model (SRGAN) checkpoint, None if not specified
@@ -51,13 +51,13 @@ start_epoch = 0  # start at this epoch
 iterations = 200000  # number of training iterations
 # epochs = args.epoch if not args.epoch==None else 2000
 workers = 4  # number of workers for loading data in the DataLoader
-vgg_loss_enable = True if args.vggloss==True else False
+vgg_loss_enable = True if args.vggloss == True else False
 vgg19_i = 5  # the index i in the definition for VGG loss; see paper or models.py
 vgg19_j = 4  # the index j in the definition for VGG loss; see paper or models.py
 # beta = 1e-3  # the coefficient to weight the adversarial loss in the perceptual loss
 beta = 1e-2  # the coefficient to weight the adversarial loss in the perceptual loss
 print_freq = 500  # print training status once every __ batches
-lr = 1e-4 # learning rate
+lr = 1e-4  # learning rate
 # lr = 1e-2  # learning rate
 grad_clip = None  # clip if gradients are exploding
 
@@ -71,6 +71,7 @@ cudnn.benchmark = True
 #     if epoch in lr_base:
 #         return lr_base[epoch]
 #     return 1
+
 
 def main():
     """
@@ -146,8 +147,8 @@ def main():
                               scaling_factor=scaling_factor,
                               lr_img_type='imagenet-norm',
                               hr_img_type='imagenet-norm')
-    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=workers,
-                                               pin_memory=True)
+    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size = batch_size, shuffle = True, num_workers = workers,
+                                               pin_memory = True)
     
     # Total number of epochs to train for
     print('iterations: {}'.format(iterations))
@@ -187,11 +188,11 @@ def main():
         # Save checkpoint
         if epoch % 300 == 0:
             torch.save({'epoch': epoch,
-                    'generator': generator,
-                    'discriminator': discriminator,
-                    'optimizer_g': optimizer_g,
-                    'optimizer_d': optimizer_d},
-                    os.path.join(checkpoint_path, 'checkpoint_srgan_{}.pth.tar'.format(epoch)))
+                'generator': generator,
+                'discriminator': discriminator,
+                'optimizer_g': optimizer_g,
+                'optimizer_d': optimizer_d},
+                os.path.join(checkpoint_path, 'checkpoint_srgan_{}.pth.tar'.format(epoch)))
             clear_output(wait=False)
 
 
@@ -312,14 +313,14 @@ def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_
                   'Cont. Loss {loss_c.val:.4f} ({loss_c.avg:.4f})--'
                   'Adv. Loss {loss_a.val:.4f} ({loss_a.avg:.4f})--'
                   'Disc. Loss {loss_d.val:.4f} ({loss_d.avg:.4f})--'.format(epoch,
-                                                                          i,
-                                                                          len(train_loader),
-                                                                          batch_time=batch_time,
-                                                                          data_time=data_time,
-                                                                          loss_c=losses_c,
-                                                                          loss_a=losses_a,
-                                                                          loss_d=losses_d
-                                                                          ), end = '')
+                       i,
+                       len(train_loader),
+                       batch_time=batch_time,
+                       data_time=data_time,
+                       loss_c=losses_c,
+                       loss_a=losses_a,
+                       loss_d=losses_d
+                       ), end = '')
     for p in optimizer_g.param_groups:
         print('learning rate: {}'.format(p['lr']))
 
