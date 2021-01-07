@@ -37,7 +37,7 @@ srresnet_checkpoint = args.srresnet  # filepath of the trained SRResNet checkpoi
 # Discriminator parameters
 kernel_size_d = 3  # kernel size in all convolutional blocks
 n_channels_d = 64  # number of output channels in the first convolutional block, after which it is doubled in every 2nd block thereafter
-n_blocks_d = 20  # number of convolutional blocks
+n_blocks_d = 16  # number of convolutional blocks
 fc_size_d = 1024  # size of the first fully connected layer
 
 checkpoint_path = args.root if not args.root == None else './'
