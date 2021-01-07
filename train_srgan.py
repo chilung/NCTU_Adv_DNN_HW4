@@ -31,13 +31,13 @@ scaling_factor = 3  # the scaling factor for the generator; the input LR images 
 large_kernel_size_g = 9  # kernel size of the first and last convolutions which transform the inputs and outputs
 small_kernel_size_g = 3  # kernel size of all convolutions in-between, i.e. those in the residual and subpixel convolutional blocks
 n_channels_g = 64  # number of channels in-between, i.e. the input and output channels for the residual and subpixel convolutional blocks
-n_blocks_g = 32  # number of residual blocks
+n_blocks_g = 28  # number of residual blocks
 srresnet_checkpoint = args.srresnet  # filepath of the trained SRResNet checkpoint used for initialization
 
 # Discriminator parameters
 kernel_size_d = 3  # kernel size in all convolutional blocks
 n_channels_d = 64  # number of output channels in the first convolutional block, after which it is doubled in every 2nd block thereafter
-n_blocks_d = 16  # number of convolutional blocks
+n_blocks_d = 14  # number of convolutional blocks
 fc_size_d = 1024  # size of the first fully connected layer
 
 checkpoint_path = args.root if not args.root == None else './'
