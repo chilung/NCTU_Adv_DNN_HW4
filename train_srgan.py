@@ -37,7 +37,7 @@ srresnet_checkpoint = args.srresnet  # filepath of the trained SRResNet checkpoi
 # Discriminator parameters
 kernel_size_d = 3  # kernel size in all convolutional blocks
 n_channels_d = 64  # number of output channels in the first convolutional block, after which it is doubled in every 2nd block thereafter
-n_blocks_d = 14  # number of convolutional blocks
+n_blocks_d = 20  # number of convolutional blocks
 fc_size_d = 1024  # size of the first fully connected layer
 
 checkpoint_path = args.root if not args.root == None else './'
@@ -89,7 +89,7 @@ def main():
                               scaling_factor=scaling_factor)
 
         # Initialize generator network with pretrained SRResNet
-        # generator.initialize_with_srresnet(srresnet_checkpoint=srresnet_checkpoint)
+        generator.initialize_with_srresnet(srresnet_checkpoint=srresnet_checkpoint)
 
         # Initialize generator's optimizer
         optimizer_g = torch.optim.Adam(params=filter(lambda p: p.requires_grad, generator.parameters()),
