@@ -71,22 +71,27 @@ cudnn.benchmark = True
 #         return lr_base[epoch]
 #     return 1
 
+float min_p_loss, min_d_loss
 
 def main():
     """
     Training.
     """
-    global start_epoch, epoch, checkpoint, srresnet_checkpoint, vgg_loss_enable
+    global start_epoch, epoch, checkpoint, srresnet_checkpoint, vgg_loss_enable, min_p_loss, min_d_loss
     print(vgg_loss_enable, args.vggloss)
 
     # Initialize model or load checkpoint
     if checkpoint is None:
         # Generator
+        min_p_loss = 1e10
+        min_d_loss = 1e10
+        
         generator = Generator(large_kernel_size=large_kernel_size_g,
                               small_kernel_size=small_kernel_size_g,
                               n_channels=n_channels_g,
                               n_blocks=n_blocks_g,
                               scaling_factor=scaling_factor)
+        best_generator = generator
 
         # Initialize generator network with pretrained SRResNet
         # generator.initialize_with_srresnet(srresnet_checkpoint=srresnet_checkpoint)
@@ -100,6 +105,7 @@ def main():
                                       n_channels=n_channels_d,
                                       n_blocks=n_blocks_d,
                                       fc_size=fc_size_d)
+        best_discriminator = discriminator
 
         # Initialize discriminator's optimizer
         optimizer_d = torch.optim.Adam(params=filter(lambda p: p.requires_grad, discriminator.parameters()),
@@ -110,9 +116,13 @@ def main():
         checkpoint = torch.load(checkpoint)
         start_epoch = checkpoint['epoch'] + 1
         generator = checkpoint['generator']
+        best_generator = generator
         discriminator = checkpoint['discriminator']
+        best_discriminator = discriminator
         optimizer_g = checkpoint['optimizer_g']
         optimizer_d = checkpoint['optimizer_d']
+        min_p_loss = checkpoint['min_p_loss']
+        min_d_loss = checkpoint['min_d_loss']
         print("\nLoaded checkpoint from epoch %d.\n" % (checkpoint['epoch'] + 1))
 
     if args.olr != None:
@@ -174,7 +184,7 @@ def main():
         #     adjust_learning_rate(optimizer_d, adjust_rate)
 
         # One epoch's training
-        train(train_loader=train_loader,
+        p_loss, d_loss = train(train_loader=train_loader,
               generator=generator,
               discriminator=discriminator,
               truncated_vgg19=truncated_vgg19,
@@ -185,14 +195,23 @@ def main():
               epoch=epoch)
 
         # Save checkpoint
-        if epoch % 40 == 0:
+        if p_loss < min_p_loss:
+            best_generator = generator
+            save_model = True
+        if d_loss < min_d_loss:
+            best_discriminator = discriminator
+            save_model = True
+            
+        if save_model == True:
             torch.save({'epoch': epoch,
-                'generator': generator,
-                'discriminator': discriminator,
+                'generator': best_generator,
+                'discriminator': best_discriminator,
                 'optimizer_g': optimizer_g,
-                'optimizer_d': optimizer_d},
+                'optimizer_d': optimizer_d,
+                'min_p_loss': min_p_loss,
+                'min_d_loss': min_d_loss},
                 os.path.join(checkpoint_path, 'checkpoint_srgan_{}.pth.tar'.format(epoch)))
-            clear_output(wait=False)
+            save_model = False
 
 
 def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_criterion, adversarial_loss_criterion,
@@ -325,6 +344,7 @@ def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_
 
     del lr_imgs, hr_imgs, sr_imgs, hr_imgs_in_vgg_space, sr_imgs_in_vgg_space, hr_discriminated, sr_discriminated  # free some memory since their histories may be stored
 
+    return perceptual_loss, loss_d
 
 if __name__ == '__main__':
     main()
