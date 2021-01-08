@@ -202,6 +202,7 @@ def main():
             save_model = True
             
         if save_model == True:
+            print('save model epoch {} min_p_loss: {}, min_d_loss: {}'.format(epoch, min_p_loss, min_d_loss))
             torch.save({'epoch': epoch,
                 'generator': best_generator,
                 'discriminator': best_discriminator,
