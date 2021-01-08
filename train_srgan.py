@@ -79,11 +79,12 @@ def main():
     global start_epoch, epoch, checkpoint, srresnet_checkpoint, vgg_loss_enable
     print(vgg_loss_enable, args.vggloss)
 
+    save_model = False
+    
     # Initialize model or load checkpoint
     if checkpoint is None:
         # Generator
         min_p_loss = 1e10
-        min_d_loss = 1e10
         
         generator = Generator(large_kernel_size=large_kernel_size_g,
                               small_kernel_size=small_kernel_size_g,
@@ -121,7 +122,6 @@ def main():
         optimizer_g = checkpoint['optimizer_g']
         optimizer_d = checkpoint['optimizer_d']
         min_p_loss = checkpoint['min_p_loss']
-        min_d_loss = checkpoint['min_d_loss']
         print("\nLoaded checkpoint from epoch %d.\n" % (checkpoint['epoch'] + 1))
 
     if args.olr != None:
@@ -183,7 +183,7 @@ def main():
         #     adjust_learning_rate(optimizer_d, adjust_rate)
 
         # One epoch's training
-        p_loss, d_loss = train(train_loader=train_loader,
+        p_loss = train(train_loader=train_loader,
               generator=generator,
               discriminator=discriminator,
               truncated_vgg19=truncated_vgg19,
@@ -196,20 +196,17 @@ def main():
         # Save checkpoint
         if p_loss < min_p_loss:
             best_generator = generator
-            save_model = True
-        if d_loss < min_d_loss:
             best_discriminator = discriminator
             save_model = True
             
         if save_model == True:
-            print('save model epoch {} min_p_loss: {}, min_d_loss: {}'.format(epoch, min_p_loss, min_d_loss))
+            print('save model epoch {} min_p_loss: {}'.format(epoch, min_p_loss))
             torch.save({'epoch': epoch,
                 'generator': best_generator,
                 'discriminator': best_discriminator,
                 'optimizer_g': optimizer_g,
                 'optimizer_d': optimizer_d,
-                'min_p_loss': min_p_loss,
-                'min_d_loss': min_d_loss},
+                'min_p_loss': min_p_loss},
                 os.path.join(checkpoint_path, 'checkpoint_srgan_{}.pth.tar'.format(epoch)))
             save_model = False
 
@@ -344,7 +341,7 @@ def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_
 
     del lr_imgs, hr_imgs, sr_imgs, hr_imgs_in_vgg_space, sr_imgs_in_vgg_space, hr_discriminated, sr_discriminated  # free some memory since their histories may be stored
 
-    return perceptual_loss, loss_d
+    return perceptual_loss
 
 if __name__ == '__main__':
     main()
