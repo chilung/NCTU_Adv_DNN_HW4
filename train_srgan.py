@@ -71,13 +71,12 @@ cudnn.benchmark = True
 #         return lr_base[epoch]
 #     return 1
 
-float min_p_loss, min_d_loss
 
 def main():
     """
     Training.
     """
-    global start_epoch, epoch, checkpoint, srresnet_checkpoint, vgg_loss_enable, min_p_loss, min_d_loss
+    global start_epoch, epoch, checkpoint, srresnet_checkpoint, vgg_loss_enable
     print(vgg_loss_enable, args.vggloss)
 
     # Initialize model or load checkpoint
