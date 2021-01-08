@@ -197,6 +197,7 @@ def main():
         if p_loss < min_p_loss:
             best_generator = generator
             best_discriminator = discriminator
+            min_p_loss = p_loss
             save_model = True
             
         if save_model == True:
