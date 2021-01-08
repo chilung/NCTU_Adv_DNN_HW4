@@ -217,7 +217,7 @@ class Generator(nn.Module):
 
         :param srresnet_checkpoint: checkpoint filepath
         """
-        srresnet = torch.load(srresnet_checkpoint)['generator']
+        srresnet = torch.load(srresnet_checkpoint)['model']
         self.net.load_state_dict(srresnet.state_dict())
 
         print("\nLoaded weights from pre-trained SRResNet.\n")
