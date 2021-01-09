@@ -16,7 +16,10 @@ gdd.download_file_from_google_drive(file_id='1B7QlA1HPH7zMENuYXDxlbzgNLbJqS1zJ',
 gdd.download_file_from_google_drive(file_id='1bIowNL2X6zqfnmfcxqX3oPh2GIR9lxnr',
                 dest_path='./training_hr_images.zip',
                 unzip=True)
-                
+gdd.download_file_from_google_drive(file_id='1-KDzq38-rMrFauxD565URAeraDEbz2MV',
+                dest_path='./checkpoint_srresnet.pth.tar',
+                unzip=False)
+
 from os import listdir
 from os.path import isfile, join
  
