@@ -10,11 +10,6 @@ from google_drive_downloader import GoogleDriveDownloader as gdd
 import torch
 import torchvision
 
-%cd /content
-if not os.path.isdir('/content/NCTU_Adv_DNN_HW4'):
-    !git clone https://github.com/chilung/NCTU_Adv_DNN_HW4.git
-%cd /content/NCTU_Adv_DNN_HW4
-
 gdd.download_file_from_google_drive(file_id='1B7QlA1HPH7zMENuYXDxlbzgNLbJqS1zJ',
                 dest_path='./testing_lr_images.zip',
                 unzip=True)
