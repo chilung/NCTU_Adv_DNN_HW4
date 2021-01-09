@@ -2,8 +2,8 @@
 import os
  
 # import google colab utilities
-from google.colab import drive
-from google.colab.patches import cv2_imshow
+# from google.colab import drive
+# from google.colab.patches import cv2_imshow
 from google_drive_downloader import GoogleDriveDownloader as gdd
  
 # import pytorch utilities
