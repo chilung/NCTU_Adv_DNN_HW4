@@ -30,8 +30,6 @@ import json
 with open('./train_images.json', 'w') as f:
     json.dump(trainingfiles, f)
 
-!git pull
-
 # !python train_srresnet.py --help
 # !python train_srresnet.py -r '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_3' -c 'checkpoint_srresnet_52000.pth.tar'
 
