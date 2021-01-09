@@ -34,7 +34,7 @@ with open('./train_images.json', 'w') as f:
 # python train_srresnet.py -r '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_3' -c 'checkpoint_srresnet_52000.pth.tar'
 
 # python train_srgan.py --help
-python train_srgan.py -r './checkpoint_3x_vgg_g28l_r14l_3'
+# python train_srgan.py -r './checkpoint_3x_vgg_g28l_r14l_3'
 # python train_srgan.py -o 1e-7 -v -r '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_vgg_longrun' -e 60000 -c 'checkpoint_srgan_44100.pth.tar' -s '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_3/checkpoint_srresnet_52630.pth.tar'
  
 # python output_sr.py -o '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/output_3x_mse_longrun' -g '/content/drive/MyDrive/NCTU/基於深度學習之視覺辨識專論/HW/HW4/checkpoint_3x_vgg_longrun/checkpoint_srgan_27000.pth.tar'
